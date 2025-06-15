@@ -1,95 +1,85 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { CloseOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Card, Col, Image } from "antd";
+import Title from "antd/es/typography/Title";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100vw",
+        backgroundImage: `linear-gradient(rgba(181, 179, 179, 0.85), rgba(8, 8, 8, 0.85)), url("/FitnessBackground.jfif")`,
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "space-evenly",
+          height: "100vh",
+        }}
+      >
+        <div>
+          <Title style={{ color: "whitesmoke" }}>Welcome</Title>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div>
+          <Button className="btn">Login</Button>
+          <Button className="btn">Register</Button>
+        </div>
+
+        {/* On register click */}
+        <div>
+          <Col span={8}>
+            <Card
+              title=""
+              variant="borderless"
+              style={{
+                width: 300,
+                display: "flexbox",
+                flexDirection: "column",
+                background: "#2f2f2f",
+                color: "white",
+              }}
+            >
+              <div
+                style={{
+                  display: "inline-flex",
+                  justifyContent: "space-between",
+                  width: "100%",
+                }}
+              >
+                <div>
+                  <Title level={2}>Account Type?</Title>{" "}
+                </div>
+                <div>
+                  <Link href="">
+                    <CloseOutlined />
+                  </Link>
+                </div>
+              </div>
+              <div>
+                <Link href="">
+                  <UserOutlined />
+                  Trainer
+                </Link>
+              </div>
+              <div>
+                <Link href="">
+                  <UserOutlined />
+                  Client
+                </Link>
+              </div>
+            </Card>
+          </Col>
+        </div>
+      </div>
     </div>
   );
 }
