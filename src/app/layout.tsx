@@ -1,3 +1,4 @@
+import { UsersProvider } from "@/Providers/clientProvider";
 import "./globals.css";
 
 export default function RootLayout({
@@ -8,7 +9,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body style={{ display: "inline-flex", width: "100vw", height: "100vh" }}>
-        {children}
+        <UsersProvider>{children}</UsersProvider>
       </body>
     </html>
   );
