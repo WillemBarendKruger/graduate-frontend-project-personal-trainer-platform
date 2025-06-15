@@ -1,5 +1,5 @@
 "use client";
-import { Button, Checkbox, Form, FormProps, Input } from "antd";
+import { Button, Form, FormProps, Input } from "antd";
 import Title from "antd/es/typography/Title";
 
 type FieldType = {

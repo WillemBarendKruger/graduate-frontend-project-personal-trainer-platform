@@ -1,5 +1,5 @@
 import { CloseOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Card, Col, Image } from "antd";
+import { Button, Card, Col } from "antd";
 import Title from "antd/es/typography/Title";
 import Link from "next/link";
 
