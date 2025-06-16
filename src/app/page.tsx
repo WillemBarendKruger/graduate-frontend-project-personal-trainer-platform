@@ -30,8 +30,12 @@ export default function Home() {
           <Title style={{ color: "whitesmoke" }}>Welcome</Title>
         </div>
         <div>
-          <Button className="btn">Login</Button>
-          <Button className="btn">Register</Button>
+          <Link href="./auth/login">
+            <Button className="btn">Login</Button>
+          </Link>
+          <Link href="./auth/register">
+            <Button className="btn">Register</Button>
+          </Link>
         </div>
 
         {/* On register click */}
