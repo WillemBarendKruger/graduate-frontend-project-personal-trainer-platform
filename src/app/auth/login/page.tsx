@@ -1,22 +1,46 @@
 "use client";
-import { Button, Form, FormProps, Input } from "antd";
+import { useUserActions, useUserState } from "@/Providers/clientProvider";
+import { Button, Form, FormProps, Input, message } from "antd";
 import Title from "antd/es/typography/Title";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 type FieldType = {
   email?: string;
   password?: string;
-  remember?: string;
 };
 
-const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-  console.log("Success:", values);
-};
+const LoginTrainer = () => {
+  const { logIn } = useUserActions();
+  const { user, isPending, isError } = useUserState();
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
-const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
+  useEffect(() => {
+    if (user) {
+      message.success("Login successful!");
+      if (user.role === "trainer" || user.role === "admin") {
+        router.replace("/TrainerDashboard");
+      } else if (user.role === "client") {
+        router.replace("/clientDashboard");
+      }
+    }
+  }, [user]);
 
-const loginTrainer = () => {
+  const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
+    setLoading(true);
+    try {
+      await logIn(values.email || "", values.password || "");
+    } catch {
+      message.error("Login failed. Please check your credentials.");
+    }
+    setLoading(false);
+  };
+
+  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = () => {
+    message.error("Please fill in all required fields.");
+  };
+
   return (
     <div
       style={{
@@ -24,6 +48,7 @@ const loginTrainer = () => {
         alignItems: "center",
         justifyContent: "center",
         width: "100vw",
+        minHeight: "100vh",
         backgroundImage: `linear-gradient(rgba(181, 179, 179, 0.6), rgba(8, 8, 8, 0.6)), url("/formBackground.jpg")`,
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -66,22 +91,23 @@ const loginTrainer = () => {
           <Input.Password />
         </Form.Item>
 
-        {/* <Form.Item<FieldType>
-          name="remember"
-          valuePropName="checked"
-          label={null}
-        >
-          <Checkbox style={{ color: "white" }}>Remember me</Checkbox>
-        </Form.Item> */}
-
         <Form.Item label={null}>
-          <Button type="primary" htmlType="submit">
+          <Button
+            type="primary"
+            htmlType="submit"
+            loading={loading || isPending}
+          >
             Login
           </Button>
         </Form.Item>
+        {isError && (
+          <div style={{ color: "red", textAlign: "center" }}>
+            Login failed. Please check your credentials.
+          </div>
+        )}
       </Form>
     </div>
   );
 };
 
-export default loginTrainer;
+export default LoginTrainer;
