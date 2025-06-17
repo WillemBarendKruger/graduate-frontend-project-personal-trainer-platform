@@ -32,7 +32,6 @@ const TrainerDashboard = () => {
       style={{
         display: "flex",
         flexWrap: "wrap",
-        flexDirection: "column",
         gap: 24,
         padding: 20,
       }}
@@ -54,7 +53,7 @@ const TrainerDashboard = () => {
                   <p>Email: {client.email}</p>
                   <p>Contact: {client.contactNumber}</p>
                   <p>DOB: {client.dateOfBirth}</p>
-                  <p>Sex: {client.sex}</p>
+                  <p>Gender: {client.sex}</p>
                 </>
               }
             />

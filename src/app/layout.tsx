@@ -3,6 +3,7 @@ import { UsersProvider } from "@/Providers/clientProvider";
 import "./globals.css";
 import { ConfigProvider, theme } from "antd";
 import "@ant-design/v5-patch-for-react-19";
+import { FoodsProvider } from "@/Providers/foodProvider";
 
 export default function RootLayout({
   children,
@@ -29,7 +30,9 @@ export default function RootLayout({
         <body
           style={{ display: "inline-flex", width: "100vw", height: "100vh" }}
         >
-          <UsersProvider>{children}</UsersProvider>
+          <UsersProvider>
+            <FoodsProvider>{children}</FoodsProvider>
+          </UsersProvider>
         </body>
       </ConfigProvider>
     </html>
