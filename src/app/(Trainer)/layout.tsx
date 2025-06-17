@@ -1,5 +1,5 @@
 "use client";
-import { UsersProvider } from "@/Providers/clientProvider";
+import { UsersProvider, useUserActions } from "@/Providers/clientProvider";
 import {
   DashboardOutlined,
   HomeOutlined,
@@ -16,6 +16,7 @@ export default function TrainerLayout({
   children: React.ReactNode;
 }>) {
   const [collapsed] = useState(false);
+  const { logOut } = useUserActions();
 
   return (
     <div style={{ display: "inline-flex", width: "100vw", height: "100vh" }}>
@@ -60,7 +61,11 @@ export default function TrainerLayout({
               {
                 key: "4",
                 icon: <UserSwitchOutlined />,
-                label: <Link href="/auth/login">Sign Out</Link>,
+                label: (
+                  <Link href="/auth/login" onClick={logOut}>
+                    Log Out
+                  </Link>
+                ),
               },
             ]}
           />

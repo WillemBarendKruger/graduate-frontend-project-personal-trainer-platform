@@ -21,9 +21,11 @@ import Title from "antd/es/typography/Title";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useStyles } from "../style";
 const { Option } = Select;
 
 const LoginTrainer = () => {
+  const { styles } = useStyles();
   const router = useRouter();
 
   const [form] = Form.useForm();
@@ -65,7 +67,7 @@ const LoginTrainer = () => {
       }
       await register(userPayload);
       message.success("Signup successful!");
-      router.push("/auth/signin");
+      router.push("/auth/login");
     } catch (error) {
       console.error("Signup Error:", error);
       message.error("Signup failed. Please try again.");
@@ -88,49 +90,39 @@ const LoginTrainer = () => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        width: "100vw",
-        backgroundImage: `linear-gradient(rgba(181, 179, 179, 0.6), rgba(8, 8, 8, 0.8)), url("/formBackground.jpg")`,
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-      }}
-    >
+    <div className={styles.divContainer}>
       <Form
         form={form}
         /*className={styles.loginForm}*/ onFinish={handleSignUp}
-        style={{
-          width: 300,
-          background: "#2D6E7E",
-          padding: 15,
-          border: "2px solid white",
-          borderRadius: 15,
-        }}
+        // className={styles.formContainer}
       >
-        <div style={{ display: currentStep === 1 ? "block" : "none" }}>
+        <div
+          style={{ display: currentStep === 1 ? "block" : "none" }}
+          className={styles.formContainer}
+        >
           <Form.Item>
             <Title
               style={{
                 color: "white",
-                display: "flex",
-                justifyContent: "center",
               }}
             >
               Register
             </Title>
           </Form.Item>
           <Form.Item
+            className={styles.formItem}
             name="name"
+            label="Name"
+            layout="vertical"
             rules={[{ required: true, message: "Name is required!" }]}
           >
             <Input placeholder="Name" suffix={<UserOutlined />} />
           </Form.Item>
           <Form.Item
+            className={styles.formItem}
             name="email"
+            label="Email"
+            layout="vertical"
             rules={[
               {
                 required: true,
@@ -142,13 +134,19 @@ const LoginTrainer = () => {
             <Input placeholder="Email" suffix={<MailFilled />} />
           </Form.Item>
           <Form.Item
+            className={styles.formItem}
             name="password"
+            label="Password"
+            layout="vertical"
             rules={[{ required: true, message: "Password is required!" }]}
           >
             <Input.Password placeholder="Password" />
           </Form.Item>
           <Form.Item
+            className={styles.formItem}
             name="confirmPassword"
+            label="Confirm Password"
+            layout="vertical"
             dependencies={["password"]}
             rules={[
               { required: true, message: "Confirm password is required!" },
@@ -164,19 +162,19 @@ const LoginTrainer = () => {
           >
             <Input.Password placeholder="Confirm password" />
           </Form.Item>
-          <Flex justify="center">
+          <Flex justify="center" className={styles.formItem}>
             <Button
               type="primary"
               icon={<ArrowRightOutlined />}
               onClick={handleNextClick}
-              style={{ background: "yellowgreen", color: "black" }}
+              style={{ background: "yellowgreen", color: "black", padding: 10 }}
             >
               Next Step
             </Button>
           </Flex>
           <Form.Item>
             <Flex justify="center">
-              <p style={{ fontSize: 12, color: "white" }}>
+              <p style={{ fontSize: 12 }}>
                 Have an account?{""}
                 <Link href={"/auth/login"}> log-In.</Link>
               </p>
@@ -184,9 +182,15 @@ const LoginTrainer = () => {
           </Form.Item>
         </div>
 
-        <div style={{ display: currentStep === 2 ? "block" : "none" }}>
+        <div
+          style={{ display: currentStep === 2 ? "block" : "none" }}
+          className={styles.formContainer}
+        >
           <Form.Item
+            className={styles.formItem}
             name="role"
+            label="Role"
+            layout="vertical"
             rules={[{ required: true, message: "Please select a role!" }]}
           >
             <Select placeholder="Please select a role">
@@ -195,7 +199,10 @@ const LoginTrainer = () => {
             </Select>
           </Form.Item>
           <Form.Item
+            className={styles.formItem}
             name="contactNumber"
+            label="Contact Number"
+            layout="vertical"
             rules={[
               {
                 required: true,
@@ -207,11 +214,13 @@ const LoginTrainer = () => {
               addonBefore="+27"
               placeholder="(00 000 0000)"
               suffix={<PhoneFilled />}
-              style={{ background: "white", borderRadius: 10, padding: 5 }}
             />
           </Form.Item>
           <Form.Item
+            className={styles.formItem}
             name="dateOfBirth"
+            label="Date of Birth"
+            layout="vertical"
             rules={[
               {
                 required: true,
@@ -220,7 +229,12 @@ const LoginTrainer = () => {
             ]}
           >
             <DatePicker
-              style={{ width: "100%", borderRadius: 15, height: 49 }}
+              style={{
+                width: "100%",
+                borderRadius: 15,
+                height: 49,
+                padding: 5,
+              }}
               placeholder="Select Date of Birth"
               format="YYYY-MM-DD"
             />
@@ -235,7 +249,7 @@ const LoginTrainer = () => {
               },
             ]}
           >
-            <Checkbox style={{ color: "white" }}>
+            <Checkbox>
               I accept the <Link href="/privacy-policy">Privacy Policy</Link>
             </Checkbox>
           </Form.Item>
@@ -246,7 +260,7 @@ const LoginTrainer = () => {
               loading={loading}
               style={{ background: "yellowgreen", color: "black" }}
             >
-              Sign Up
+              Register
             </Button>
           </Flex>
         </div>

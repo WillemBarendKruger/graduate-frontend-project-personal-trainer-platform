@@ -1,9 +1,12 @@
 "use client";
 import { useUserActions, useUserState } from "@/Providers/clientProvider";
-import { Button, Form, FormProps, Input, message } from "antd";
+import { MailFilled } from "@ant-design/icons";
+import { Button, Flex, Form, FormProps, Input, message } from "antd";
 import Title from "antd/es/typography/Title";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useStyles } from "../style";
+import Link from "next/link";
 
 type FieldType = {
   email?: string;
@@ -15,6 +18,8 @@ const LoginTrainer = () => {
   const { user, isPending, isError } = useUserState();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+
+  const { styles } = useStyles();
 
   useEffect(() => {
     if (user) {
@@ -42,53 +47,49 @@ const LoginTrainer = () => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        width: "100vw",
-        minHeight: "100vh",
-        backgroundImage: `linear-gradient(rgba(181, 179, 179, 0.6), rgba(8, 8, 8, 0.6)), url("/formBackground.jpg")`,
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-      }}
-    >
+    <div className={styles.divContainer}>
       <Form
         name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        style={{
-          maxWidth: 600,
-          border: "2px solid white",
-          padding: 10,
-          borderRadius: 10,
-          backgroundImage: `linear-gradient(rgba(181, 179, 179, 0.6))`,
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-        }}
+        className={styles.formContainer}
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
         <Title style={{ color: "white" }}>Login</Title>
-        <Form.Item<FieldType>
-          label="Email"
+        <Form.Item
+          className={styles.formItem}
           name="email"
-          rules={[{ required: true, message: "Please input your email!" }]}
+          label="Email"
+          layout="vertical"
+          rules={[
+            {
+              required: true,
+              type: "email",
+              message: "Valid email required!",
+            },
+          ]}
         >
-          <Input />
+          <Input placeholder="Email" suffix={<MailFilled />} />
         </Form.Item>
 
-        <Form.Item<FieldType>
-          label="Password"
+        <Form.Item
+          className={styles.formItem}
           name="password"
-          rules={[{ required: true, message: "Please input your password!" }]}
+          label="Password"
+          layout="vertical"
+          rules={[{ required: true, message: "Password is required!" }]}
         >
-          <Input.Password />
+          <Input.Password placeholder="Password" />
+        </Form.Item>
+
+        <Form.Item>
+          <Flex justify="center">
+            <p style={{ fontSize: 12 }}>
+              Dont have an account?{""}
+              <Link href={"/auth/register"}> Register.</Link>
+            </p>
+          </Flex>
         </Form.Item>
 
         <Form.Item label={null}>

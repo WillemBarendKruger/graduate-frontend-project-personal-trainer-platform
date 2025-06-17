@@ -1,5 +1,4 @@
-import { CloseOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Card, Col } from "antd";
+import { Button } from "antd";
 import Title from "antd/es/typography/Title";
 import Link from "next/link";
 
@@ -36,52 +35,6 @@ export default function Home() {
           <Link href="./auth/register">
             <Button className="btn">Register</Button>
           </Link>
-        </div>
-
-        {/* On register click */}
-        <div>
-          <Col span={8}>
-            <Card
-              title=""
-              variant="borderless"
-              style={{
-                width: 300,
-                display: "flexbox",
-                flexDirection: "column",
-                background: "#2f2f2f",
-                color: "white",
-              }}
-            >
-              <div
-                style={{
-                  display: "inline-flex",
-                  justifyContent: "space-between",
-                  width: "100%",
-                }}
-              >
-                <div>
-                  <Title level={2}>Account Type?</Title>{" "}
-                </div>
-                <div>
-                  <Link href="">
-                    <CloseOutlined />
-                  </Link>
-                </div>
-              </div>
-              <div>
-                <Link href="">
-                  <UserOutlined />
-                  Trainer
-                </Link>
-              </div>
-              <div>
-                <Link href="">
-                  <UserOutlined />
-                  Client
-                </Link>
-              </div>
-            </Card>
-          </Col>
         </div>
       </div>
     </div>
