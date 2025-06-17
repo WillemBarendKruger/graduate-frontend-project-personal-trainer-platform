@@ -68,7 +68,7 @@ const TrainerLayout = ({ children }: React.PropsWithChildren) => {
               {
                 key: "3",
                 icon: <DashboardOutlined />,
-                label: <Link href="/TrainerFoods">Foods</Link>,
+                label: <Link href="/TrainerFood">Foods</Link>,
               },
               {
                 key: "4",

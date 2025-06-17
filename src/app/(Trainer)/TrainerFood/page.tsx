@@ -1,3 +1,71 @@
-const foodItemsPage = () => {};
+"use client";
+import { decodeToken } from "@/utils/jwt";
+import { useFoodState, useFoodActions } from "@/Providers/foodProvider/index";
+import { IFood } from "@/Providers/foodProvider/context";
+import { EditOutlined, EllipsisOutlined } from "@ant-design/icons";
+import { Card } from "antd";
+import { useEffect } from "react";
 
-export default foodItemsPage;
+const actions: React.ReactNode[] = [
+  <EditOutlined key="edit" />,
+  <EllipsisOutlined key="ellipsis" />,
+];
+
+const FoodsPage = () => {
+  const { foods } = useFoodState();
+  const { getFoods } = useFoodActions();
+  const userObj = decodeToken(sessionStorage.getItem("token") ?? "");
+  useEffect(() => {
+    const Id = userObj.id;
+    if (Id) {
+      getFoods();
+    }
+  }, []);
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        gap: 24,
+        padding: 20,
+        minWidth: 500,
+      }}
+    >
+      {foods && foods.length > 0 ? (
+        foods.map((food: IFood) => (
+          <Card
+            key={food.id}
+            style={{
+              minWidth: 300,
+              maxHeight: "fit-content",
+              marginBottom: 16,
+            }}
+            actions={actions}
+          >
+            <Card.Meta
+              title={food.name}
+              description={
+                <div>
+                  <p>protein: {food.protein}</p>
+                  <p>carbs: {food.carbs}</p>
+                  <p>sugar: {food.sugar}</p>
+                  <p>fat: {food.fat}</p>
+                  <p>fiber: {food.fiber}</p>
+                  <p>sodium: {food.sodium}</p>
+                  <p>potassium: {food.potassium}</p>
+                  <p>cholesterol: {food.cholesterol}</p>
+                  <p>energy: {food.energy}</p>
+                </div>
+              }
+            />
+          </Card>
+        ))
+      ) : (
+        <div>No food items found.</div>
+      )}
+    </div>
+  );
+};
+
+export default FoodsPage;

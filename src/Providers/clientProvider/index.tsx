@@ -91,7 +91,7 @@ export const UsersProvider = ({ children }: { children: React.ReactNode }) => {
       dispatch(registerError());
     }
     dispatch(registerPending());
-    const endpoint = `users/register`;
+    const endpoint = user.role ? `users/register` : `users/register/mobile`;
     try {
       await instance.post(endpoint, user);
       dispatch(registerSuccess(user));

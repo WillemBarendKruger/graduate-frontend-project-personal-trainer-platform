@@ -1,10 +1,13 @@
 "use client";
 import React from "react";
 import { Layout, Menu, theme } from "antd";
+import Link from "next/link";
+import { useUserActions } from "@/Providers/clientProvider";
 
 const { Header, Content } = Layout;
 
 const ClientLayout = ({ children }: React.PropsWithChildren) => {
+  const { logOut } = useUserActions();
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -32,7 +35,11 @@ const ClientLayout = ({ children }: React.PropsWithChildren) => {
             },
             {
               key: "2",
-              label: "Log Out",
+              label: (
+                <Link href="/auth/login" onClick={logOut}>
+                  Log Out
+                </Link>
+              ),
             },
           ]}
           style={{ flex: 1, minWidth: 0 }}

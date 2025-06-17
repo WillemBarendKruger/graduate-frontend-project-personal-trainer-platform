@@ -45,11 +45,3 @@ export interface IUser {
   fullName?: string;
   user?: string;
 }
-
-//name
-//email
-//password
-//contactnumber
-//policies
-//date of birth,you dont have this one
-//
