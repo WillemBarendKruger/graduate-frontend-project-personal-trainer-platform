@@ -2,6 +2,7 @@
 import { UsersProvider } from "@/Providers/clientProvider";
 import "./globals.css";
 import { ConfigProvider, theme } from "antd";
+import "@ant-design/v5-patch-for-react-19";
 
 export default function RootLayout({
   children,
@@ -16,6 +17,11 @@ export default function RootLayout({
           token: {
             colorPrimary: "#a0d911",
             colorInfo: "#a0d911",
+          },
+          components: {
+            Input: {
+              colorText: "rgb(255,255,255)",
+            },
           },
           algorithm: darkAlgorithm,
         }}

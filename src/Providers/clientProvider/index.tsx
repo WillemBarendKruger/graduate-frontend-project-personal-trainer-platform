@@ -74,7 +74,7 @@ export const UsersProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       const response = await instance.post(endpoint, { email, password });
       const token = response.data.data.token;
-      localStorage.setItem("token", token);
+      sessionStorage.setItem("token", token);
       getCurrentUser();
       dispatch(logInSuccess(token));
     } catch {
@@ -96,7 +96,7 @@ export const UsersProvider = ({ children }: { children: React.ReactNode }) => {
   const logOut = () => {
     try {
       dispatch(logOutPending());
-      localStorage.removeItem("token");
+      sessionStorage.removeItem("token");
       dispatch(logOutSuccess());
     } catch {
       dispatch(logOutError());

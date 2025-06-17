@@ -28,7 +28,6 @@ export enum UserActionsEnum {
   createClientError = "CREATE_CLIENT_ERROR",
 }
 
-//GET CURRENT USER ACTIONS
 export const getCurrentUserPending = createAction<IUserStateContext>(
   UserActionsEnum.getCurrentUserPending,
   () => ({ isPending: true, isSuccess: false, isError: false })
@@ -50,7 +49,6 @@ export const getCurrentUserError = createAction<IUserStateContext>(
   () => ({ isPending: false, isSuccess: false, isError: true })
 );
 
-//GET CLIENTS ACTIONS
 export const getClientsPending = createAction<IUserStateContext>(
   UserActionsEnum.getClientsPending,
   () => ({ isPending: true, isSuccess: false, isError: false })
@@ -71,7 +69,6 @@ export const getClientsError = createAction<IUserStateContext>(
   () => ({ isPending: false, isSuccess: false, isError: true })
 );
 
-//SIGN IN ACTIONS
 export const logInPending = createAction<IUserStateContext>(
   UserActionsEnum.logInPending,
   () => ({ isPending: true, isSuccess: false, isError: false })
@@ -92,7 +89,6 @@ export const logInError = createAction<IUserStateContext>(
   () => ({ isPending: false, isSuccess: false, isError: true })
 );
 
-//SIGN UP ACTIONS
 export const registerPending = createAction<IUserStateContext>(
   UserActionsEnum.registerPending,
   () => ({ isPending: true, isSuccess: false, isError: false })
@@ -113,7 +109,6 @@ export const registerError = createAction<IUserStateContext>(
   () => ({ isPending: false, isSuccess: false, isError: true })
 );
 
-//SIGN OUT ACTIONS
 export const logOutPending = createAction<IUserStateContext>(
   UserActionsEnum.logOutPending,
   () => ({ isPending: true, isSuccess: false, isError: false })
@@ -133,7 +128,6 @@ export const logOutError = createAction<IUserStateContext>(
   () => ({ isPending: false, isSuccess: false, isError: true })
 );
 
-// CREATE CLIENT ACTIONS
 export const createClientPending = createAction<IUserStateContext>(
   UserActionsEnum.createClientPending,
   () => ({ isPending: true, isSuccess: false, isError: false })
