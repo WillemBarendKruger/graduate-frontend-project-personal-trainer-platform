@@ -1,6 +1,7 @@
 import { jwtDecode } from "jwt-decode";
 
 export interface IDecodedToken {
+    id: string;
     [AbpTokenProperies.claims]: string;
     sub: string;
     jti: string;

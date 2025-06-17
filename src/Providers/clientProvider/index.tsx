@@ -33,18 +33,16 @@ export const UsersProvider = ({ children }: { children: React.ReactNode }) => {
   const getCurrentUser = async () => {
     dispatch(getCurrentUserPending());
     const endpoint = `user/current`;
-    try {
-      const response = await instance.get(endpoint);
-      if (response.status === 200 && response.data) {
+    await instance
+      .get(endpoint)
+      .then((response) => {
         const userData: IUser = { ...response.data.data };
         dispatch(getCurrentUserSuccess(userData));
-      } else {
+      })
+      .catch((error) => {
+        console.error(error);
         dispatch(getCurrentUserError());
-      }
-    } catch (error) {
-      console.log(error);
-      dispatch(getCurrentUserError());
-    }
+      });
   };
 
   const getClients = async (idTrainer: string) => {
@@ -71,20 +69,29 @@ export const UsersProvider = ({ children }: { children: React.ReactNode }) => {
   const logIn = async (email: string, password: string) => {
     dispatch(logInPending());
     const endpoint = `users/login`;
-    try {
-      const response = await instance.post(endpoint, { email, password });
-      const token = response.data.data.token;
-      sessionStorage.setItem("token", token);
-      getCurrentUser();
-      dispatch(logInSuccess(token));
-    } catch {
-      dispatch(logInError());
-    }
+    await instance
+      .post(endpoint, { email, password })
+      .then((response) => {
+        const token = response.data.data.token;
+        sessionStorage.setItem("token", token);
+        getCurrentUser();
+        dispatch(logInSuccess(token));
+      })
+      .catch((error) => {
+        console.error(error);
+        dispatch(logInError());
+      });
   };
 
   const register = async (user: IUser) => {
+    if (!user.trainerId) {
+      message.error(
+        "Clients should be registered by a trainer first before registering."
+      );
+      dispatch(registerError());
+    }
     dispatch(registerPending());
-    const endpoint = user.role ? `users/register` : `users/register/mobile`;
+    const endpoint = `users/register`;
     try {
       await instance.post(endpoint, user);
       dispatch(registerSuccess(user));
@@ -106,20 +113,17 @@ export const UsersProvider = ({ children }: { children: React.ReactNode }) => {
     dispatch(createClientPending());
     const endpoint = `/client`;
 
-    try {
-      console.log("Client", client);
-      const response = await instance.post(endpoint, client);
-      if (response.status === 201 && response.data) {
+    console.log("Client", client);
+    await instance
+      .post(endpoint, client)
+      .then((response) => {
         dispatch(createClientSuccess(response.data.data));
-        console.log("Client", client);
-      } else {
+        console.log("Client info", client);
+      })
+      .catch((error) => {
         dispatch(createClientError());
-        message.error("Failed to create client.");
-      }
-    } catch (error) {
-      dispatch(createClientError());
-      console.log(error);
-    }
+        console.log(error);
+      });
   };
   return (
     <UserStateContext.Provider value={state}>

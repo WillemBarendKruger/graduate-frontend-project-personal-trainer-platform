@@ -3,24 +3,37 @@ import { UsersProvider, useUserActions } from "@/Providers/clientProvider";
 import {
   DashboardOutlined,
   HomeOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  UserAddOutlined,
   UserSwitchOutlined,
 } from "@ant-design/icons";
-import { Menu } from "antd";
+import { Button, Menu } from "antd";
 import Sider from "antd/es/layout/Sider";
 import Link from "next/link";
 import { useState } from "react";
+import withAuth from "../HOC/withAuth";
 
-export default function TrainerLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  const [collapsed] = useState(false);
+const TrainerLayout = ({ children }: React.PropsWithChildren) => {
+  const [collapsed, setCollapsed] = useState(false);
   const { logOut } = useUserActions();
+
+  const toggleCollapsed = () => {
+    setCollapsed(!collapsed);
+  };
 
   return (
     <div style={{ display: "inline-flex", width: "100vw", height: "100vh" }}>
-      <div style={{ width: 256 }}>
+      <div style={{ width: 200 }}>
+        <div>
+          <Button
+            type="primary"
+            onClick={toggleCollapsed}
+            style={{ marginBottom: 16, left: 0, position: "sticky" }}
+          >
+            {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+          </Button>
+        </div>
         <Sider
           trigger={null}
           collapsible
@@ -30,7 +43,6 @@ export default function TrainerLayout({
           style={{
             overflow: "auto",
             height: "100%",
-            position: "sticky",
             insetInlineStart: 0,
             top: 0,
             bottom: 0,
@@ -60,6 +72,11 @@ export default function TrainerLayout({
               },
               {
                 key: "4",
+                icon: <UserAddOutlined />,
+                label: <Link href="/AddClient">Add Client</Link>,
+              },
+              {
+                key: "5",
                 icon: <UserSwitchOutlined />,
                 label: (
                   <Link href="/auth/login" onClick={logOut}>
@@ -71,7 +88,10 @@ export default function TrainerLayout({
           />
         </Sider>
       </div>
+
       <UsersProvider>{children}</UsersProvider>
     </div>
   );
-}
+};
+
+export default withAuth(TrainerLayout);

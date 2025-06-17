@@ -13,7 +13,7 @@ type FieldType = {
   password?: string;
 };
 
-const LoginTrainer = () => {
+const Login = () => {
   const { logIn } = useUserActions();
   const { user, isPending, isError } = useUserState();
   const router = useRouter();
@@ -111,4 +111,4 @@ const LoginTrainer = () => {
   );
 };
 
-export default LoginTrainer;
+export default Login;

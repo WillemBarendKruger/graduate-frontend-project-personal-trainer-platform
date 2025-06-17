@@ -1,10 +1,10 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useUserState, useUserActions } from "@/Providers/clientProvider";
 import { Card, Avatar, Spin } from "antd";
-import withAuth from "@/app/HOC/withAuth";
 import { EditOutlined, EllipsisOutlined } from "@ant-design/icons";
 import { IUser } from "@/Providers/clientProvider/models";
+import { decodeToken } from "@/utils/jwt";
 
 const actions: React.ReactNode[] = [
   <EditOutlined key="edit" />,
@@ -14,23 +14,34 @@ const actions: React.ReactNode[] = [
 const TrainerDashboard = () => {
   const state = useUserState();
   const { getClients } = useUserActions();
+  const fetchedClients = useRef(false);
+  const userObj = decodeToken(sessionStorage.getItem("token") ?? "");
 
   useEffect(() => {
-    const trainerId = state.user?.id;
-    if (trainerId) {
+    const trainerId = userObj.id;
+    if (trainerId && !fetchedClients.current) {
       getClients(trainerId);
+      fetchedClients.current = true;
     }
   }, []);
 
   if (state.isPending) return <Spin tip="Loading clients..." />;
 
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", gap: 24, padding: 20 }}>
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        flexDirection: "column",
+        gap: 24,
+        padding: 20,
+      }}
+    >
       {state.users && state.users.length > 0 ? (
         state.users.map((client: IUser) => (
           <Card
             key={client._id}
-            style={{ minWidth: 300, marginBottom: 16 }}
+            style={{ minWidth: 300, maxHeight: 200, marginBottom: 16 }}
             actions={actions}
           >
             <Card.Meta
@@ -56,5 +67,4 @@ const TrainerDashboard = () => {
   );
 };
 
-// Only allow trainers and admins
-export default withAuth(TrainerDashboard);
+export default TrainerDashboard;
