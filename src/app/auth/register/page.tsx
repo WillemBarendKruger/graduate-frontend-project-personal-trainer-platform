@@ -24,7 +24,7 @@ import { useState } from "react";
 import { useStyles } from "../style";
 const { Option } = Select;
 
-const LoginTrainer = () => {
+const Register = () => {
   const { styles } = useStyles();
   const router = useRouter();
 
@@ -66,11 +66,11 @@ const LoginTrainer = () => {
         return;
       }
       await register(userPayload);
-      message.success("Signup successful!");
+      message.success("Register successful!");
       router.push("/auth/login");
     } catch (error) {
-      console.error("Signup Error:", error);
-      message.error("Signup failed. Please try again.");
+      console.error("Register Error:", error);
+      message.error("Register failed. Please try again.");
     }
     setLoading(false);
   };
@@ -91,11 +91,7 @@ const LoginTrainer = () => {
 
   return (
     <div className={styles.divContainer}>
-      <Form
-        form={form}
-        /*className={styles.loginForm}*/ onFinish={handleSignUp}
-        // className={styles.formContainer}
-      >
+      <Form form={form} onFinish={handleSignUp}>
         <div
           style={{ display: currentStep === 1 ? "block" : "none" }}
           className={styles.formContainer}
@@ -269,4 +265,4 @@ const LoginTrainer = () => {
   );
 };
 
-export default LoginTrainer;
+export default Register;

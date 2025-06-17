@@ -1,0 +1,19 @@
+import { createStyles, css } from "antd-style";
+
+export const useStyles = createStyles({
+  divContainer: css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    min-height: 100vh;
+  `,
+  formContainer: css`
+    max-width: 700px;
+    width: 400px;
+    border: 2px solid yellowgreen;
+    border-radius: 10px;
+    background: rgba(45, 110, 126, 0.548);
+    padding: 20px;
+  `,
+});

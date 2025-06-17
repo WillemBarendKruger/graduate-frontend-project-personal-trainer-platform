@@ -26,9 +26,20 @@ export default function Home() {
         }}
       >
         <div>
-          <Title style={{ color: "whitesmoke" }}>Welcome</Title>
+          <Title
+            style={{
+              color: "whitesmoke",
+              fontSize: 80,
+              textDecoration: "underline",
+            }}
+          >
+            FitFusion
+          </Title>
+          <p style={{ fontSize: 20, fontFamily: "Roboto" }}>
+            Where fitness meets its fusion
+          </p>
         </div>
-        <div>
+        <div style={{ scale: 1.5 }}>
           <Link href="./auth/login">
             <Button className="btn">Login</Button>
           </Link>
