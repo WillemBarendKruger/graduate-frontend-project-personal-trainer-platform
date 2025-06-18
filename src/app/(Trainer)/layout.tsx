@@ -49,7 +49,7 @@ const TrainerLayout = ({ children }: React.PropsWithChildren) => {
             {
               key: "3",
               icon: <BarChartOutlined />,
-              label: <Link href="/TrainerFoods">Foods</Link>,
+              label: <Link href="/TrainerFood">Foods</Link>,
             },
             {
               key: "4",
@@ -69,7 +69,6 @@ const TrainerLayout = ({ children }: React.PropsWithChildren) => {
         />
       </Sider>
       <Layout>
-        {/* <Header style={{ padding: 0, background: colorBgContainer }} /> */}
         <Content style={{ width: "100%" }}>
           <UsersProvider>{children}</UsersProvider>
         </Content>
