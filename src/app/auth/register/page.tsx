@@ -35,36 +35,37 @@ const Register = () => {
 
   const handleRegister = async (values: IUser) => {
     setLoading(true);
+
+    const userPayload: IUser = {
+      name: values.name || "",
+      email: values.email || "",
+      password: values.password || "",
+      confirmPassword: values.confirmPassword || "",
+      role: values.role || "client",
+      contactNumber: values.contactNumber || "",
+      planType: values.planType || "base",
+      activeState: values.role === "admin" ? true : undefined,
+      trial: values.role === "admin" ? false : undefined,
+      policiesAccepted: values.policiesAccepted || false,
+    };
+
+    if (
+      !userPayload.name ||
+      !userPayload.email ||
+      !userPayload.password ||
+      !userPayload.confirmPassword
+    ) {
+      message.error("Please fill all required fields");
+      setLoading(false);
+      return;
+    }
+
+    if (userPayload.password !== userPayload.confirmPassword) {
+      message.error("Password and Confirm Password do not match");
+      setLoading(false);
+      return;
+    }
     try {
-      const userPayload: IUser = {
-        name: values.name || "",
-        email: values.email || "",
-        password: values.password || "",
-        confirmPassword: values.confirmPassword || "",
-        role: values.role || "client",
-        contactNumber: values.contactNumber || "",
-        planType: values.planType || "base",
-        activeState: values.role === "admin" ? true : undefined,
-        trial: values.role === "admin" ? false : undefined,
-        policiesAccepted: values.policiesAccepted || false,
-      };
-
-      if (
-        !userPayload.name ||
-        !userPayload.email ||
-        !userPayload.password ||
-        !userPayload.confirmPassword
-      ) {
-        message.error("Please fill all required fields");
-        setLoading(false);
-        return;
-      }
-
-      if (userPayload.password !== userPayload.confirmPassword) {
-        message.error("Password and Confirm Password do not match");
-        setLoading(false);
-        return;
-      }
       await register(userPayload);
       message.success("Register successful!");
       router.push("/auth/login");
