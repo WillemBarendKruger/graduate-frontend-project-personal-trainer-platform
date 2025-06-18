@@ -12,7 +12,7 @@ const actions: React.ReactNode[] = [
 ];
 
 const TrainerDashboard = () => {
-  const state = useUserState();
+  const { users, isPending } = useUserState();
   const { getClients } = useUserActions();
   const fetchedClients = useRef(false);
   const [id, setId] = useState<string | null>(null);
@@ -20,8 +20,8 @@ const TrainerDashboard = () => {
   useEffect(() => {
     const token = sessionStorage.getItem("token");
     if (token) {
-      const userObj = decodeToken(token);
-      setId(userObj.id);
+      const { id } = decodeToken(token);
+      setId(id);
     }
   }, []);
 
@@ -32,12 +32,12 @@ const TrainerDashboard = () => {
     }
   }, [id, getClients]);
 
-  if (state.isPending)
+  if (isPending)
     return (
       <Flex
         justify="center"
         align="center"
-        style={{ marginBottom: 20, width: "100%" }}
+        style={{ marginBottom: 20, width: "100vw", height: "100vh" }}
       >
         <Spin size="large" />
       </Flex>
@@ -50,10 +50,11 @@ const TrainerDashboard = () => {
         flexWrap: "wrap",
         gap: 24,
         padding: 20,
+        width: "100vw",
       }}
     >
-      {state.users && state.users.length > 0 ? (
-        state.users.map((client: IUser) => (
+      {users && users.length > 0 ? (
+        users.map((client: IUser) => (
           <Card
             key={client._id}
             style={{ minWidth: 300, maxHeight: 200, marginBottom: 16 }}
