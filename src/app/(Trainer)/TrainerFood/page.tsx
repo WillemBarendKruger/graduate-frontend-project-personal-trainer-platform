@@ -14,10 +14,10 @@ const actions: React.ReactNode[] = [
 const FoodsPage = () => {
   const { foods, isPending } = useFoodState();
   const { getFoods } = useFoodActions();
-  const userObj = decodeToken(sessionStorage.getItem("token") ?? "");
+
   useEffect(() => {
-    const Id = userObj.id;
-    if (Id) {
+    const userObj = decodeToken(sessionStorage.getItem("token") ?? "");
+    if (userObj.id) {
       getFoods();
     }
   }, []);
@@ -27,7 +27,7 @@ const FoodsPage = () => {
       <Flex
         justify="center"
         align="center"
-        style={{ marginBottom: 20, width: "100%" }}
+        style={{ marginBottom: 20, width: "100vw", height: "100vh" }}
       >
         <Spin size="large" />
       </Flex>
@@ -41,6 +41,7 @@ const FoodsPage = () => {
         gap: 24,
         padding: 20,
         minWidth: 500,
+        width: "100vw",
       }}
     >
       {foods && foods.length > 0 ? (

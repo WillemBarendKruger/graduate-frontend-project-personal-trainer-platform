@@ -31,7 +31,9 @@ const withAuth = (
         } else if (isSuccess && user?.role) {
           if (allowedRoles.length > 0 && !allowedRoles.includes(user.role)) {
             router.replace(
-              user.role === "admin" ? "/TrainerDashboard" : "/clientDashboard"
+              user.role === "admin" || user.role === "trainer"
+                ? "/TrainerDashboard"
+                : "/clientDashboard"
             );
           }
         }

@@ -3,6 +3,7 @@ import React from "react";
 import { Layout, Menu, theme } from "antd";
 import Link from "next/link";
 import { useUserActions } from "@/Providers/clientProvider";
+import withAuth from "@/app/HOC/withAuth";
 
 const { Header, Content } = Layout;
 
@@ -61,4 +62,4 @@ const ClientLayout = ({ children }: React.PropsWithChildren) => {
   );
 };
 
-export default ClientLayout;
+export default withAuth(ClientLayout);

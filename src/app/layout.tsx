@@ -1,7 +1,7 @@
 "use client";
 import { UsersProvider } from "@/Providers/clientProvider";
 import "./globals.css";
-import { ConfigProvider, theme } from "antd";
+import { ConfigProvider, theme, App as AntdApp } from "antd";
 import "@ant-design/v5-patch-for-react-19";
 import { FoodsProvider } from "@/Providers/foodProvider";
 
@@ -30,9 +30,11 @@ export default function RootLayout({
         <body
           style={{ display: "inline-flex", width: "100vw", height: "100vh" }}
         >
-          <UsersProvider>
-            <FoodsProvider>{children}</FoodsProvider>
-          </UsersProvider>
+          <AntdApp>
+            <UsersProvider>
+              <FoodsProvider>{children}</FoodsProvider>
+            </UsersProvider>
+          </AntdApp>
         </body>
       </ConfigProvider>
     </html>
