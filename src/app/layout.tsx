@@ -4,6 +4,7 @@ import "./globals.css";
 import { ConfigProvider, theme, App as AntdApp } from "antd";
 import "@ant-design/v5-patch-for-react-19";
 import { FoodsProvider } from "@/Providers/foodProvider";
+import { MealsProvider } from "@/Providers/mealProvider";
 
 export default function RootLayout({
   children,
@@ -32,7 +33,9 @@ export default function RootLayout({
         >
           <AntdApp>
             <UsersProvider>
-              <FoodsProvider>{children}</FoodsProvider>
+              <FoodsProvider>
+                <MealsProvider>{children}</MealsProvider>
+              </FoodsProvider>
             </UsersProvider>
           </AntdApp>
         </body>

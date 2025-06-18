@@ -67,7 +67,7 @@ export const MealsProvider = ({ children }: { children: React.ReactNode }) => {
 
   const getMealClient = async (id: string) => {
     dispatch(getMealClientPending());
-    const endpoint = `mealplan/client/${id}`;
+    const endpoint = `mealplans/client/${id}`;
     await instance
       .get(endpoint)
       .then((response) => {

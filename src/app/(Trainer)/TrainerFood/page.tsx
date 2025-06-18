@@ -17,7 +17,6 @@ const FoodsPage = () => {
     }
   }, []);
 
-  // Prepare data for the table
   const data =
     foods?.map((food: IFood, idx: number) => ({
       key: food.id ?? idx.toString(),
@@ -33,7 +32,6 @@ const FoodsPage = () => {
       energy: food.energy,
     })) || [];
 
-  // Generate unique name filters for the Name column
   const nameFilters = Array.from(new Set(data.map((d) => d.name))).map(
     (name) => ({
       text: name,
@@ -48,61 +46,61 @@ const FoodsPage = () => {
       filters: nameFilters,
       onFilter: (value, record) => record.name === value,
       filterSearch: true,
-      width: "fir-content",
+      width: "fit-content",
     },
     {
       title: "Protein",
       dataIndex: "protein",
       sorter: (a, b) => a.protein - b.protein,
-      width: "fir-content",
+      width: "fit-content",
     },
     {
       title: "Carbs",
       dataIndex: "carbs",
       sorter: (a, b) => a.carbs - b.carbs,
-      width: "fir-content",
+      width: "fit-content",
     },
     {
       title: "Sugar",
       dataIndex: "sugar",
       sorter: (a, b) => a.sugar - b.sugar,
-      width: "fir-content",
+      width: "fit-content",
     },
     {
       title: "Fat",
       dataIndex: "fat",
       sorter: (a, b) => a.fat - b.fat,
-      width: "fir-content",
+      width: "fit-content",
     },
     {
       title: "Fiber",
       dataIndex: "fiber",
       sorter: (a, b) => a.fiber - b.fiber,
-      width: "fir-content",
+      width: "fit-content",
     },
     {
       title: "Sodium",
       dataIndex: "sodium",
       sorter: (a, b) => a.sodium - b.sodium,
-      width: "fir-content",
+      width: "fit-content",
     },
     {
       title: "Potassium",
       dataIndex: "potassium",
       sorter: (a, b) => a.potassium - b.potassium,
-      width: "fir-content",
+      width: "fit-content",
     },
     {
       title: "Cholesterol",
       dataIndex: "cholesterol",
       sorter: (a, b) => a.cholesterol - b.cholesterol,
-      width: "fir-content",
+      width: "fit-content",
     },
     {
       title: "Energy",
       dataIndex: "energy",
       sorter: (a, b) => a.energy - b.energy,
-      width: "fir-content",
+      width: "fit-content",
     },
   ];
 

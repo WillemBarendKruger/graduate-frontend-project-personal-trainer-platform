@@ -42,7 +42,11 @@ const withAuth = (
 
     if (isPending || isChecking) {
       return (
-        <Flex justify="center" style={{ marginBottom: 20 }}>
+        <Flex
+          justify="center"
+          align="center"
+          style={{ marginBottom: 20, width: "100%" }}
+        >
           <Spin size="large" />
         </Flex>
       );
