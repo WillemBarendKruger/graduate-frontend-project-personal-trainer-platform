@@ -13,7 +13,7 @@ import { decodeToken } from "@/utils/jwt";
 // const PAGE_SIZE = 9;
 
 const ClientDashboard = () => {
-  const { meals, isPending } = useMealState();
+  const { isPending } = useMealState();
   const { getMealClient } = useMealActions();
   const fetchedClients = useRef(false);
   const [id, setId] = useState<string | null>(null);
@@ -48,8 +48,6 @@ const ClientDashboard = () => {
   // const startIdx = (page - 1) * PAGE_SIZE;
   // const endIdx = startIdx + PAGE_SIZE;
   // const paginatedUsers = meals?.slice(startIdx, endIdx) || [];
-
-  console.log("meals", meals);
 
   return (
     <div style={{ width: "100vw", height: "80vh", padding: 20 }}>

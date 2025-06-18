@@ -55,6 +55,7 @@ const Login = () => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
+        layout="vertical"
       >
         <Title style={{ color: "white" }}>Login</Title>
         <Form.Item
@@ -69,6 +70,7 @@ const Login = () => {
               message: "Valid email required!",
             },
           ]}
+          style={{ marginBottom: 16 }}
         >
           <Input placeholder="Email" suffix={<MailFilled />} />
         </Form.Item>

@@ -26,7 +26,6 @@ export const getCurrentFoodPending = createAction<IFoodStateContext>(
 export const getCurrentfoodSuccess = createAction<IFoodStateContext, IFood>(
   FoodActionsEnum.getCurrentFoodSuccess,
   (food: IFood) => {
-    // console.log("foodAction",food)
     return {
       isPending: false,
       isSuccess: true,
@@ -87,7 +86,6 @@ export const getSearchFoodPending = createAction<IFoodStateContext>(
 export const getSearchFoodSuccess = createAction<IFoodStateContext, IFood>(
   FoodActionsEnum.getFoodSearchSuccess,
   (food: IFood) => {
-    // console.log("foodAction",food)
     return {
       isPending: false,
       isSuccess: true,

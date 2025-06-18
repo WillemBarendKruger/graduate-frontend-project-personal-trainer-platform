@@ -63,7 +63,7 @@ export const UsersProvider = ({ children }: { children: React.ReactNode }) => {
       dispatch(getClientsSuccess(filteredData));
     } catch (error) {
       dispatch(getClientsError());
-      console.log("Error message", error);
+      console.error("Error message", error);
     }
   };
 
@@ -115,16 +115,14 @@ export const UsersProvider = ({ children }: { children: React.ReactNode }) => {
     dispatch(createClientPending());
     const endpoint = `/client`;
 
-    console.log("Client", client);
     await instance
       .post(endpoint, client)
       .then((response) => {
         dispatch(createClientSuccess(response.data.data));
-        console.log("Client info", client);
       })
       .catch((error) => {
         dispatch(createClientError());
-        console.log(error);
+        console.error(error);
       });
   };
   return (

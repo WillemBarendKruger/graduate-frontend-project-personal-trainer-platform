@@ -44,7 +44,7 @@ export const FoodsProvider = ({ children }: { children: React.ReactNode }) => {
       })
       .catch((error) => {
         dispatch(getFoodsError());
-        console.log("Error message", error);
+        console.error("Error message", error);
       });
   };
 
@@ -52,16 +52,14 @@ export const FoodsProvider = ({ children }: { children: React.ReactNode }) => {
     dispatch(createFoodPending());
     const endpoint = `/food`;
 
-    console.log("Client", food);
     await instance
       .post(endpoint, food)
       .then((response) => {
         dispatch(createFoodSuccess(response.data.data));
-        console.log("food info", food);
       })
       .catch((error) => {
         dispatch(createFoodError());
-        console.log(error);
+        console.error(error);
       });
   };
 
@@ -75,7 +73,7 @@ export const FoodsProvider = ({ children }: { children: React.ReactNode }) => {
       })
       .catch((error) => {
         dispatch(getSearchFoodError());
-        console.log("Error message", error);
+        console.error("Error message", error);
       });
   };
 
