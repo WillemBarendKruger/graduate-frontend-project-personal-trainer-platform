@@ -37,7 +37,7 @@ const Login = () => {
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
     setLoading(true);
     try {
-      await logIn(values.email || "", values.password || "");
+      await logIn(values.email ?? "", values.password ?? "");
     } catch {
       message.error("Login failed. Please check your credentials.");
     }
