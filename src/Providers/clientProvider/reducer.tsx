@@ -23,6 +23,7 @@ export const UserReducer = handleActions<IUserStateContext, IUserStateContext>(
     [UserActionsEnum.logOutSuccess]: (state, action) => ({
       ...state,
       ...action.payload,
+      user: undefined,
     }),
     [UserActionsEnum.logOutError]: (state, action) => ({
       ...state,

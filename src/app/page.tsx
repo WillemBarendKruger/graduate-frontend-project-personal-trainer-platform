@@ -40,10 +40,10 @@ export default function Home() {
           </p>
         </div>
         <div style={{ scale: 1.5 }}>
-          <Link href="./auth/login">
+          <Link href="/auth/login">
             <Button className="btn">Login</Button>
           </Link>
-          <Link href="./auth/register">
+          <Link href="/auth/register">
             <Button className="btn">Register</Button>
           </Link>
         </div>

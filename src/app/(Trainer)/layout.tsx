@@ -3,6 +3,7 @@ import { UsersProvider, useUserActions } from "@/Providers/clientProvider";
 import {
   AppstoreOutlined,
   BarChartOutlined,
+  FileAddOutlined,
   TeamOutlined,
   UserAddOutlined,
   UserSwitchOutlined,
@@ -58,6 +59,11 @@ const TrainerLayout = ({ children }: React.PropsWithChildren) => {
             },
             {
               key: "5",
+              icon: <FileAddOutlined />,
+              label: <Link href="/addFood">Add Food Item</Link>,
+            },
+            {
+              key: "6",
               icon: <UserSwitchOutlined />,
               label: (
                 <Link href="/auth/login" onClick={logOut}>

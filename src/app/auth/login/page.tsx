@@ -29,8 +29,6 @@ const Login = () => {
       } else if (user.role === "client") {
         router.replace("/clientDashboard");
       }
-    } else {
-      router.replace("/auth/login");
     }
   }, [user]);
 
