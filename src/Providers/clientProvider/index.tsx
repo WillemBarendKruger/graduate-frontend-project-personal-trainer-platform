@@ -24,10 +24,12 @@ import {
   createClientSuccess,
   createClientError,
 } from "./actions";
+import { useRouter } from "next/navigation";
 
 export const UsersProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(UserReducer, INITIAL_STATE);
   const instance = getAxiosInstance();
+  const router = useRouter();
 
   const getCurrentUser = async () => {
     dispatch(getCurrentUserPending());
@@ -101,6 +103,7 @@ export const UsersProvider = ({ children }: { children: React.ReactNode }) => {
       dispatch(logOutPending());
       sessionStorage.removeItem("token");
       dispatch(logOutSuccess());
+      router.replace("/auth/login");
     } catch {
       dispatch(logOutError());
     }

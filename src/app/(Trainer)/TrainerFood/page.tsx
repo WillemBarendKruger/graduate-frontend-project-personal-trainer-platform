@@ -14,10 +14,10 @@ const actions: React.ReactNode[] = [
 const FoodsPage = () => {
   const { foods, isPending } = useFoodState();
   const { getFoods } = useFoodActions();
-  const userObj = decodeToken(sessionStorage.getItem("token") ?? "");
+
   useEffect(() => {
-    const Id = userObj.id;
-    if (Id) {
+    const userObj = decodeToken(sessionStorage.getItem("token") ?? "");
+    if (userObj.id) {
       getFoods();
     }
   }, []);

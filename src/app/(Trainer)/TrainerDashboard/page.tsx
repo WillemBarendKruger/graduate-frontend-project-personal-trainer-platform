@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useUserState, useUserActions } from "@/Providers/clientProvider";
 import { Card, Avatar, Spin, Flex } from "antd";
 import { EditOutlined, EllipsisOutlined } from "@ant-design/icons";
@@ -15,15 +15,22 @@ const TrainerDashboard = () => {
   const state = useUserState();
   const { getClients } = useUserActions();
   const fetchedClients = useRef(false);
-  const userObj = decodeToken(sessionStorage.getItem("token") ?? "");
+  const [id, setId] = useState<string | null>(null);
 
   useEffect(() => {
-    const trainerId = userObj.id;
-    if (trainerId && !fetchedClients.current) {
-      getClients(trainerId);
-      fetchedClients.current = true;
+    const token = sessionStorage.getItem("token");
+    if (token) {
+      const userObj = decodeToken(token);
+      setId(userObj.id);
     }
   }, []);
+
+  useEffect(() => {
+    if (id && !fetchedClients.current) {
+      getClients(id);
+      fetchedClients.current = true;
+    }
+  }, [id, getClients]);
 
   if (state.isPending)
     return (
