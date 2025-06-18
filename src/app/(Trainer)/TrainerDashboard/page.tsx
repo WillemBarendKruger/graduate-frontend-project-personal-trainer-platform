@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { useUserState, useUserActions } from "@/Providers/clientProvider";
-import { Card, Avatar, Spin } from "antd";
+import { Card, Avatar, Spin, Flex } from "antd";
 import { EditOutlined, EllipsisOutlined } from "@ant-design/icons";
 import { IUser } from "@/Providers/clientProvider/models";
 import { decodeToken } from "@/utils/jwt";
@@ -25,7 +25,16 @@ const TrainerDashboard = () => {
     }
   }, []);
 
-  if (state.isPending) return <Spin tip="Loading clients..." />;
+  if (state.isPending)
+    return (
+      <Flex
+        justify="center"
+        align="center"
+        style={{ marginBottom: 20, width: "100%" }}
+      >
+        <Spin size="large" />
+      </Flex>
+    );
 
   return (
     <div

@@ -24,7 +24,6 @@ import {
   createClientSuccess,
   createClientError,
 } from "./actions";
-import { message } from "antd";
 
 export const UsersProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(UserReducer, INITIAL_STATE);
@@ -84,14 +83,11 @@ export const UsersProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const register = async (user: IUser) => {
-    if (!user.trainerId) {
-      message.error(
-        "Clients should be registered by a trainer first before registering."
-      );
-      dispatch(registerError());
-    }
     dispatch(registerPending());
-    const endpoint = user.role ? `users/register` : `users/register/mobile`;
+    const endpoint =
+      user.role === "admin" || user.role === "trainer"
+        ? `users/register`
+        : `users/register/mobile`;
     try {
       await instance.post(endpoint, user);
       dispatch(registerSuccess(user));

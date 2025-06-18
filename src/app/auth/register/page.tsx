@@ -33,7 +33,7 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const { register } = useUserActions();
 
-  const handleSignUp = async (values: IUser) => {
+  const handleRegister = async (values: IUser) => {
     setLoading(true);
     try {
       const userPayload: IUser = {
@@ -91,7 +91,7 @@ const Register = () => {
 
   return (
     <div className={styles.divContainer}>
-      <Form form={form} onFinish={handleSignUp}>
+      <Form form={form} onFinish={handleRegister}>
         <div
           style={{ display: currentStep === 1 ? "block" : "none" }}
           className={styles.formContainer}

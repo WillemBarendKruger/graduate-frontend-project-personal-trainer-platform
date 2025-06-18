@@ -3,16 +3,18 @@ import {
   Button,
   Checkbox,
   DatePicker,
+  Flex,
   Form,
   FormProps,
   Input,
   message,
   Select,
+  Spin,
 } from "antd";
 import { useStyles } from "../style";
 import Title from "antd/es/typography/Title";
 import { IClient } from "@/Providers/clientProvider/models";
-import { useUserActions } from "@/Providers/clientProvider";
+import { useUserActions, useUserState } from "@/Providers/clientProvider";
 import { MailFilled } from "@ant-design/icons";
 import { decodeToken } from "@/utils/jwt";
 
@@ -20,6 +22,7 @@ const { Option } = Select;
 
 const AddClient = () => {
   const [form] = Form.useForm();
+  const { isPending } = useUserState();
   const { createClient } = useUserActions();
   const userObj = decodeToken(sessionStorage.getItem("token") ?? "");
 
@@ -39,6 +42,17 @@ const AddClient = () => {
   };
 
   const { styles } = useStyles();
+
+  if (isPending)
+    return (
+      <Flex
+        justify="center"
+        align="center"
+        style={{ marginBottom: 20, width: "100%" }}
+      >
+        <Spin size="large" />
+      </Flex>
+    );
 
   return (
     <div className={styles.divContainer}>
