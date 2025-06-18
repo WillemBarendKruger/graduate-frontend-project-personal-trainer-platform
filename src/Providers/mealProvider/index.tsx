@@ -88,16 +88,14 @@ export const MealsProvider = ({ children }: { children: React.ReactNode }) => {
     dispatch(createMealPending());
     const endpoint = `/Meal`;
 
-    console.log("Client", Meal);
     await instance
       .post(endpoint, Meal)
       .then((response) => {
         dispatch(createMealSuccess(response.data.data));
-        console.log("Meal info", Meal);
       })
       .catch((error) => {
         dispatch(createMealError());
-        console.log(error);
+        console.error(error);
       });
   };
 

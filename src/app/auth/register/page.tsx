@@ -92,7 +92,7 @@ const Register = () => {
 
   return (
     <div className={styles.divContainer}>
-      <Form form={form} onFinish={handleRegister}>
+      <Form form={form} onFinish={handleRegister} layout="vertical">
         <div
           style={{ display: currentStep === 1 ? "block" : "none" }}
           className={styles.formContainer}

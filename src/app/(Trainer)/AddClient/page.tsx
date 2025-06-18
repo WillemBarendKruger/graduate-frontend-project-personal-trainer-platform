@@ -27,7 +27,6 @@ const AddClient = () => {
   const userObj = decodeToken(sessionStorage.getItem("token") ?? "");
 
   const onFinish: FormProps<IClient>["onFinish"] = async (values) => {
-    console.log("addpage", values);
     message.loading("Trying to register client");
     const clientPayload: IClient = {
       fullName: values.fullName,

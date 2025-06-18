@@ -35,7 +35,6 @@ export const getCurrentUserPending = createAction<IUserStateContext>(
 export const getCurrentUserSuccess = createAction<IUserStateContext, IUser>(
   UserActionsEnum.getCurrentUserSuccess,
   (user: IUser) => {
-    // console.log("UserAction",user)
     return {
       isPending: false,
       isSuccess: true,

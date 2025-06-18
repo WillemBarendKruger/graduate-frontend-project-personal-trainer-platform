@@ -26,7 +26,6 @@ export const getMealClientPending = createAction<IMealStateContext>(
 export const getMealClientSuccess = createAction<IMealStateContext, IMeal>(
   MealActionsEnum.getMealClientSuccess,
   (meal: IMeal) => {
-    // console.log("foodAction",food)
     return {
       isPending: false,
       isSuccess: true,
@@ -87,7 +86,6 @@ export const getMealIdPending = createAction<IMealStateContext>(
 export const getMealIdSuccess = createAction<IMealStateContext, IMeal>(
   MealActionsEnum.getMealIdSuccess,
   (meal: IMeal) => {
-    // console.log("foodAction",food)
     return {
       isPending: false,
       isSuccess: true,

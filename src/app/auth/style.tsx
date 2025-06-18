@@ -29,6 +29,6 @@ export const useStyles = createStyles({
     align-items: center;
   `,
   formItem: css`
-    padding: 10px;
+    width: 100%;
   `,
 });
