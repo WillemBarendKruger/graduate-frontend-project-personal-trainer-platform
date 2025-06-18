@@ -90,12 +90,15 @@ export const UsersProvider = ({ children }: { children: React.ReactNode }) => {
       user.role === "admin" || user.role === "trainer"
         ? `users/register`
         : `users/register/mobile`;
-    try {
-      await instance.post(endpoint, user);
-      dispatch(registerSuccess(user));
-    } catch {
-      dispatch(registerError());
-    }
+    await instance
+      .post(endpoint, user)
+      .then(() => {
+        dispatch(registerSuccess(user));
+      })
+      .catch((error) => {
+        dispatch(registerError());
+        throw error;
+      });
   };
 
   const logOut = () => {
