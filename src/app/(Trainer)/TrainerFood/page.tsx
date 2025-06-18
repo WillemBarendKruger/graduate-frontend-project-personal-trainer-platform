@@ -3,7 +3,7 @@ import { decodeToken } from "@/utils/jwt";
 import { useFoodState, useFoodActions } from "@/Providers/foodProvider/index";
 import { IFood } from "@/Providers/foodProvider/context";
 import { EditOutlined, EllipsisOutlined } from "@ant-design/icons";
-import { Card } from "antd";
+import { Card, Flex, Spin } from "antd";
 import { useEffect } from "react";
 
 const actions: React.ReactNode[] = [
@@ -12,7 +12,7 @@ const actions: React.ReactNode[] = [
 ];
 
 const FoodsPage = () => {
-  const { foods } = useFoodState();
+  const { foods, isPending } = useFoodState();
   const { getFoods } = useFoodActions();
   const userObj = decodeToken(sessionStorage.getItem("token") ?? "");
   useEffect(() => {
@@ -21,6 +21,17 @@ const FoodsPage = () => {
       getFoods();
     }
   }, []);
+
+  if (isPending)
+    return (
+      <Flex
+        justify="center"
+        align="center"
+        style={{ marginBottom: 20, width: "100%" }}
+      >
+        <Spin size="large" />
+      </Flex>
+    );
 
   return (
     <div

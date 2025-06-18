@@ -2,7 +2,7 @@
 import { useFoodState } from "@/Providers/foodProvider/index";
 import { IFood } from "@/Providers/foodProvider/context";
 import { EditOutlined, EllipsisOutlined } from "@ant-design/icons";
-import { Card, Spin } from "antd";
+import { Card, Flex, Spin } from "antd";
 
 const actions: React.ReactNode[] = [
   <EditOutlined key="edit" />,
@@ -11,7 +11,12 @@ const actions: React.ReactNode[] = [
 
 const ClientDashboard = () => {
   const { foods, isPending } = useFoodState();
-  if (isPending) return <Spin tip="Loading clients..." />;
+  if (isPending)
+    return (
+      <Flex justify="center" style={{ marginBottom: 20 }}>
+        <Spin size="large" />
+      </Flex>
+    );
   return (
     <div
       style={{
