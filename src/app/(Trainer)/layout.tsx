@@ -3,65 +3,75 @@ import { UsersProvider, useUserActions } from "@/Providers/clientProvider";
 import {
   AppstoreOutlined,
   BarChartOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
   TeamOutlined,
   UserSwitchOutlined,
 } from "@ant-design/icons";
-import { Layout, Menu } from "antd";
+import { Button, Layout, Menu, MenuProps } from "antd";
 import withAuth from "../HOC/withAuth";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 
-const { Content, Sider } = Layout;
-
-const siderStyle: React.CSSProperties = {
-  overflow: "auto",
-  height: "100vh",
-  position: "sticky",
-  insetInlineStart: 0,
-  top: 0,
-  bottom: 0,
-  scrollbarWidth: "thin",
-  scrollbarGutter: "stable",
-};
+const { Content } = Layout;
 
 const TrainerLayout = ({ children }: React.PropsWithChildren) => {
   const { logOut } = useUserActions();
+
+  type MenuItem = Required<MenuProps>["items"][number];
+
+  const items: MenuItem[] = [
+    {
+      key: "1",
+      icon: <TeamOutlined />,
+      label: <Link href="/TrainerDashboard">Dashboard</Link>,
+    },
+    {
+      key: "2",
+      icon: <AppstoreOutlined />,
+      label: <Link href="/TrainerMeals">Meals</Link>,
+    },
+    {
+      key: "3",
+      icon: <BarChartOutlined />,
+      label: <Link href="/TrainerFood">Foods</Link>,
+    },
+    {
+      key: "4",
+      icon: <UserSwitchOutlined />,
+      label: (
+        <Link href="/auth/login" onClick={logOut}>
+          Log Out
+        </Link>
+      ),
+    },
+  ];
+
+  const [collapsed, setCollapsed] = useState(false);
+
+  const toggleCollapsed = () => {
+    setCollapsed(!collapsed);
+  };
+
   return (
-    <Layout hasSider>
-      <Sider style={siderStyle}>
-        <div />
+    <Layout hasSider style={{ background: "transparent", height: "95vh" }}>
+      <div style={{ minWidth: 150 }}>
+        <Button
+          type="primary"
+          onClick={toggleCollapsed}
+          style={{ marginBottom: 16 }}
+        >
+          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+        </Button>
         <Menu
-          theme="dark"
-          mode="inline"
           defaultSelectedKeys={["1"]}
-          items={[
-            {
-              key: "1",
-              icon: <TeamOutlined />,
-              label: <Link href="/TrainerDashboard">Dashboard</Link>,
-            },
-            {
-              key: "2",
-              icon: <AppstoreOutlined />,
-              label: <Link href="/TrainerMeals">Meals</Link>,
-            },
-            {
-              key: "3",
-              icon: <BarChartOutlined />,
-              label: <Link href="/TrainerFood">Foods</Link>,
-            },
-            {
-              key: "4",
-              icon: <UserSwitchOutlined />,
-              label: (
-                <Link href="/auth/login" onClick={logOut}>
-                  Log Out
-                </Link>
-              ),
-            },
-          ]}
+          mode="inline"
+          theme="dark"
+          inlineCollapsed={collapsed}
+          items={items}
+          style={{ height: "100%" }}
         />
-      </Sider>
+      </div>
       <Layout>
         <Content style={{ width: "100%" }}>
           <UsersProvider>{children}</UsersProvider>

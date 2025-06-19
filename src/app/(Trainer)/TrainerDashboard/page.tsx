@@ -2,15 +2,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useUserState, useUserActions } from "@/Providers/clientProvider";
 import { Card, Avatar, Spin, Flex, Pagination } from "antd";
-import { EditOutlined, EllipsisOutlined } from "@ant-design/icons";
 import { IUser } from "@/Providers/clientProvider/models";
 import { decodeToken } from "@/utils/jwt";
 import AddClient from "@/app/Components/AddClient";
-
-const actions: React.ReactNode[] = [
-  <EditOutlined key="edit" />,
-  <EllipsisOutlined key="ellipsis" />,
-];
+import ViewUser from "@/app/Components/viewUser";
 
 const PAGE_SIZE = 9;
 
@@ -67,7 +62,7 @@ const TrainerDashboard = () => {
             <Card
               key={client._id}
               style={{ minWidth: 300, maxHeight: 200, marginBottom: 16 }}
-              actions={actions}
+              actions={[<ViewUser key={client._id} {...client} />]}
             >
               <Card.Meta
                 avatar={

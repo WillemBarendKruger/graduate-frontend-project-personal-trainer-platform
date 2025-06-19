@@ -16,10 +16,10 @@ import {
   Input,
   message,
   Select,
-  Image,
 } from "antd";
 import Title from "antd/es/typography/Title";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useStyles } from "../style";
@@ -93,7 +93,7 @@ const Register = () => {
 
   return (
     <div className={styles.divContainer}>
-      <Image src="/FitfusionLogo.png" style={{ width: 150 }} />
+      <Image src="/FitfusionLogo.png" alt="logo" width={200} height={200} />
       <Form form={form} onFinish={handleRegister} layout="vertical">
         <div
           style={{ display: currentStep === 1 ? "flex" : "none" }}
