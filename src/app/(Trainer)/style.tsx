@@ -10,10 +10,13 @@ export const useStyles = createStyles({
   `,
   formContainer: css`
     max-width: 700px;
-    width: 400px;
+    width: 100%;
     border: 2px solid yellowgreen;
     border-radius: 10px;
     background: rgba(45, 110, 126, 0.548);
     padding: 20px;
+  `,
+  formItem: css`
+    margin: 10px;
   `,
 });

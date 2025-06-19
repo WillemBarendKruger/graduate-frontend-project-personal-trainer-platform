@@ -5,6 +5,7 @@ import { Card, Avatar, Spin, Flex, Pagination } from "antd";
 import { EditOutlined, EllipsisOutlined } from "@ant-design/icons";
 import { IUser } from "@/Providers/clientProvider/models";
 import { decodeToken } from "@/utils/jwt";
+import AddClient from "@/app/Components/AddClient";
 
 const actions: React.ReactNode[] = [
   <EditOutlined key="edit" />,
@@ -52,6 +53,7 @@ const TrainerDashboard = () => {
 
   return (
     <div style={{ width: "100vw", padding: 20 }}>
+      <AddClient />
       <div
         style={{
           display: "flex",

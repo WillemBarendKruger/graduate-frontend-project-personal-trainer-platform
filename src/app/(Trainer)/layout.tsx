@@ -5,7 +5,6 @@ import {
   BarChartOutlined,
   FileAddOutlined,
   TeamOutlined,
-  UserAddOutlined,
   UserSwitchOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
@@ -54,16 +53,11 @@ const TrainerLayout = ({ children }: React.PropsWithChildren) => {
             },
             {
               key: "4",
-              icon: <UserAddOutlined />,
-              label: <Link href="/AddClient">Add Client</Link>,
-            },
-            {
-              key: "5",
               icon: <FileAddOutlined />,
               label: <Link href="/addFood">Add Food Item</Link>,
             },
             {
-              key: "6",
+              key: "5",
               icon: <UserSwitchOutlined />,
               label: (
                 <Link href="/auth/login" onClick={logOut}>

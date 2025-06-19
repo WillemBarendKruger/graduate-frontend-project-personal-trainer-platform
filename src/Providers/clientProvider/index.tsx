@@ -25,6 +25,7 @@ import {
   createClientError,
 } from "./actions";
 import { useRouter } from "next/navigation";
+import { decodeToken } from "@/utils/jwt";
 
 export const UsersProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(UserReducer, INITIAL_STATE);
@@ -119,6 +120,8 @@ export const UsersProvider = ({ children }: { children: React.ReactNode }) => {
       .post(endpoint, client)
       .then((response) => {
         dispatch(createClientSuccess(response.data.data));
+        const { id } = decodeToken(sessionStorage.getItem("token") || "");
+        getClients(id);
       })
       .catch((error) => {
         dispatch(createClientError());
