@@ -1,7 +1,7 @@
 "use client";
 import { useUserActions, useUserState } from "@/Providers/clientProvider";
 import { MailFilled } from "@ant-design/icons";
-import { Button, Flex, Form, FormProps, Input, message } from "antd";
+import { Button, Flex, Form, FormProps, Input, message, Image } from "antd";
 import Title from "antd/es/typography/Title";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -48,6 +48,7 @@ const Login = () => {
 
   return (
     <div className={styles.divContainer}>
+      <Image src="/FitfusionLogo.png" style={{ width: 150 }} />
       <Form
         name="basic"
         className={styles.formContainer}
@@ -57,7 +58,7 @@ const Login = () => {
         autoComplete="off"
         layout="vertical"
       >
-        <Title style={{ color: "white" }}>Login</Title>
+        <Title>Login</Title>
         <Form.Item
           className={styles.formItem}
           name="email"
@@ -80,7 +81,10 @@ const Login = () => {
           name="password"
           label="Password"
           layout="vertical"
-          rules={[{ required: true, message: "Password is required!" }]}
+          rules={[
+            { required: true, message: "Password is required!" },
+            { min: 6, message: "Password must be at least 6 characters long!" },
+          ]}
         >
           <Input.Password placeholder="Password" />
         </Form.Item>
