@@ -22,6 +22,7 @@ const FoodsPage = () => {
     foods?.map((food: IFood, idx: number) => ({
       key: food.id ?? idx.toString(),
       name: food.name,
+      category: food.category,
       protein: food.protein,
       carbs: food.carbs,
       sugar: food.sugar,
@@ -33,12 +34,18 @@ const FoodsPage = () => {
       energy: food.energy,
     })) || [];
 
-  const nameFilters = Array.from(new Set(data.map((d) => d.name))).map(
+  const nameFilters = Array.from(new Set(data.map((item) => item.name))).map(
     (name) => ({
       text: name,
       value: name,
     })
   );
+  const categoryFilters = Array.from(
+    new Set(data.map((item) => item.category))
+  ).map((category) => ({
+    text: category,
+    value: category,
+  }));
 
   const columns: TableColumnsType<(typeof data)[0]> = [
     {
@@ -47,6 +54,14 @@ const FoodsPage = () => {
       filters: nameFilters,
       onFilter: (value, record) => record.name === value,
       filterSearch: true,
+      width: "fit-content",
+    },
+    {
+      title: "Category",
+      dataIndex: "category",
+      filters: categoryFilters,
+      onFilter: (value, record) => record.category === value,
+      filterSearch: false,
       width: "fit-content",
     },
     {
