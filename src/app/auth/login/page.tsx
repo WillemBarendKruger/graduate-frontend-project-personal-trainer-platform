@@ -1,12 +1,13 @@
 "use client";
 import { useUserActions, useUserState } from "@/Providers/clientProvider";
 import { MailFilled } from "@ant-design/icons";
-import { Button, Flex, Form, FormProps, Input, message, Image } from "antd";
+import { Button, Flex, Form, FormProps, Input, message } from "antd";
 import Title from "antd/es/typography/Title";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useStyles } from "../style";
 import Link from "next/link";
+import Image from "next/image";
 
 type FieldType = {
   email?: string;
@@ -48,7 +49,7 @@ const Login = () => {
 
   return (
     <div className={styles.divContainer}>
-      <Image src="/FitfusionLogo.png" style={{ width: 150 }} />
+      <Image src="/FitfusionLogo.png" alt="logo" width={200} height={200} />
       <Form
         name="basic"
         className={styles.formContainer}

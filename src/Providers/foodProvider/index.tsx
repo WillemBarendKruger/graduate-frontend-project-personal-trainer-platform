@@ -56,6 +56,7 @@ export const FoodsProvider = ({ children }: { children: React.ReactNode }) => {
       .post(endpoint, food)
       .then((response) => {
         dispatch(createFoodSuccess(response.data.data));
+        getFoods();
       })
       .catch((error) => {
         dispatch(createFoodError());

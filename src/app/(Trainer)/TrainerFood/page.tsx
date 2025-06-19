@@ -5,6 +5,7 @@ import { useFoodState, useFoodActions } from "@/Providers/foodProvider/index";
 import { IFood } from "@/Providers/foodProvider/context";
 import { decodeToken } from "@/utils/jwt";
 import type { TableColumnsType } from "antd";
+import AddFoodModal from "@/app/Components/AddFood";
 
 const FoodsPage = () => {
   const { foods, isPending } = useFoodState();
@@ -117,6 +118,7 @@ const FoodsPage = () => {
 
   return (
     <div style={{ padding: 20, width: "80vw" }}>
+      <AddFoodModal />
       <Table
         columns={columns}
         dataSource={data}
