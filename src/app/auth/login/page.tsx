@@ -42,7 +42,9 @@ const Login = () => {
 
   return (
     <div className={styles.divContainer}>
-      <Image src="/FitfusionLogo.png" alt="logo" width={200} height={200} />
+      <Link href="/">
+        <Image src="/FitfusionLogo.png" alt="logo" width={200} height={200} />
+      </Link>
       <Form
         name="basic"
         className={styles.formContainer}

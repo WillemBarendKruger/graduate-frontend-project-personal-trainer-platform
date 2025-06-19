@@ -2,13 +2,15 @@
 import React from "react";
 import { Layout, Menu, theme } from "antd";
 import Link from "next/link";
-import { useUserActions } from "@/Providers/clientProvider";
+import { useUserActions, useUserState } from "@/Providers/clientProvider";
 import withAuth from "@/app/HOC/withAuth";
+import Image from "next/image";
 
 const { Header, Content } = Layout;
 
 const ClientLayout = ({ children }: React.PropsWithChildren) => {
   const { logOut } = useUserActions();
+  const { user } = useUserState();
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -32,10 +34,21 @@ const ClientLayout = ({ children }: React.PropsWithChildren) => {
           items={[
             {
               key: "1",
-              label: "Username",
+              label: (
+                <Image
+                  src="/FitfusionLogo.png"
+                  alt="logo"
+                  width={50}
+                  height={50}
+                />
+              ),
             },
             {
               key: "2",
+              label: `${user?.name}`,
+            },
+            {
+              key: "3",
               label: (
                 <Link href="/auth/login" onClick={logOut}>
                   Log Out

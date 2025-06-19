@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div className="landingDiv">
-      <Image src="/FitfusionLogo.png" alt="logo" style={{ width: 280 }} />
+      <Image src="/FitfusionLogo.png" alt="logo" width={200} height={200} />
       <div>
         <div style={{ maxWidth: 500, margin: "0 auto", textAlign: "center" }}>
           <h2

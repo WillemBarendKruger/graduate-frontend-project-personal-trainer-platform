@@ -93,7 +93,9 @@ const Register = () => {
 
   return (
     <div className={styles.divContainer}>
-      <Image src="/FitfusionLogo.png" alt="logo" width={200} height={200} />
+      <Link href="/">
+        <Image src="/FitfusionLogo.png" alt="logo" width={200} height={200} />
+      </Link>
       <Form form={form} onFinish={handleRegister} layout="vertical">
         <div
           style={{ display: currentStep === 1 ? "flex" : "none" }}
