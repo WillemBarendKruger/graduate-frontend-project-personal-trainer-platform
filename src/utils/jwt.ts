@@ -10,6 +10,7 @@ export interface IDecodedToken {
     exp: string;
     iss: string;
     aud: string;
+    role?: string;
     [AbpTokenProperies.nameidentifier]: string;
     [AbpTokenProperies.name]: string;
     [AbpTokenProperies.emailaddress]: string;

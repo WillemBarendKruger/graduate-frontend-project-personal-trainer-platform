@@ -45,7 +45,7 @@ const withAuth = (
         <Flex
           justify="center"
           align="center"
-          style={{ marginBottom: 20, width: "100%" }}
+          style={{ marginBottom: 20, width: "100%", height: "100%" }}
         >
           <Spin size="large" />
         </Flex>

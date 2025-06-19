@@ -3,7 +3,6 @@ import { useUserActions, useUserState } from "@/Providers/clientProvider";
 import { MailFilled } from "@ant-design/icons";
 import { Button, Flex, Form, FormProps, Input, message } from "antd";
 import Title from "antd/es/typography/Title";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useStyles } from "../style";
 import Link from "next/link";
@@ -17,7 +16,6 @@ type FieldType = {
 const Login = () => {
   const { logIn } = useUserActions();
   const { user, isPending, isError } = useUserState();
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const { styles } = useStyles();
@@ -25,11 +23,6 @@ const Login = () => {
   useEffect(() => {
     if (user) {
       message.success("Login successful!");
-      if (user.role === "trainer" || user.role === "admin") {
-        router.replace("/TrainerDashboard");
-      } else if (user.role === "client") {
-        router.replace("/clientDashboard");
-      }
     }
   }, [user]);
 

@@ -78,6 +78,12 @@ export const UsersProvider = ({ children }: { children: React.ReactNode }) => {
         sessionStorage.setItem("token", token);
         getCurrentUser();
         dispatch(logInSuccess(token));
+        const { role } = decodeToken(token);
+        if (role === "admin" || role === "trainer") {
+          router.replace(`/TrainerDashboard`);
+        } else {
+          router.replace(`/clientDashboard`);
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -95,6 +101,7 @@ export const UsersProvider = ({ children }: { children: React.ReactNode }) => {
       .post(endpoint, user)
       .then(() => {
         dispatch(registerSuccess(user));
+        dispatch(logOutSuccess());
       })
       .catch((error) => {
         dispatch(registerError());
