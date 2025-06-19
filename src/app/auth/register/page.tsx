@@ -16,6 +16,7 @@ import {
   Input,
   message,
   Select,
+  Image,
 } from "antd";
 import Title from "antd/es/typography/Title";
 import Link from "next/link";
@@ -92,20 +93,13 @@ const Register = () => {
 
   return (
     <div className={styles.divContainer}>
+      <Image src="/FitfusionLogo.png" style={{ width: 150 }} />
       <Form form={form} onFinish={handleRegister} layout="vertical">
         <div
-          style={{ display: currentStep === 1 ? "block" : "none" }}
+          style={{ display: currentStep === 1 ? "flex" : "none" }}
           className={styles.formContainer}
         >
-          <Form.Item>
-            <Title
-              style={{
-                color: "white",
-              }}
-            >
-              Register
-            </Title>
-          </Form.Item>
+          <Title>Register</Title>
           <Form.Item
             className={styles.formItem}
             name="name"
@@ -135,7 +129,13 @@ const Register = () => {
             name="password"
             label="Password"
             layout="vertical"
-            rules={[{ required: true, message: "Password is required!" }]}
+            rules={[
+              { required: true, message: "Password is required!" },
+              {
+                min: 6,
+                message: "Password must be at least 6 characters long!",
+              },
+            ]}
           >
             <Input.Password placeholder="Password" />
           </Form.Item>
@@ -147,6 +147,10 @@ const Register = () => {
             dependencies={["password"]}
             rules={[
               { required: true, message: "Confirm password is required!" },
+              {
+                min: 6,
+                message: "Password must be at least 6 characters long!",
+              },
               ({ getFieldValue }) => ({
                 validator(_, value) {
                   if (!value || getFieldValue("password") === value) {
@@ -180,7 +184,7 @@ const Register = () => {
         </div>
 
         <div
-          style={{ display: currentStep === 2 ? "block" : "none" }}
+          style={{ display: currentStep === 2 ? "flex" : "none" }}
           className={styles.formContainer}
         >
           <Form.Item
