@@ -1,7 +1,11 @@
 "use client";
 import { getAxiosInstance } from "@/utils/axiosInstance";
-import { INITIAL_STATE, FoodStateContext, FoodActionContext } from "./context";
-import { IFood } from "./context";
+import {
+  INITIAL_STATE,
+  FoodStateContext,
+  FoodActionContext,
+  IFood,
+} from "./context";
 import { FoodReducer } from "./reducer";
 import { useContext, useReducer } from "react";
 import {

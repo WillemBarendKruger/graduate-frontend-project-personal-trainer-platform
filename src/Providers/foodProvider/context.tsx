@@ -3,6 +3,7 @@ import { createContext } from "react";
 export interface IFood {
   id: string;
   name: string;
+  category: string;
   protein: number;
   carbs: number;
   sugar: number;
@@ -10,7 +11,6 @@ export interface IFood {
   fiber: number;
   sodium: number;
   potassium: number;
-  category: string;
   servingSize: number;
   cholesterol: number;
   energy: number;
