@@ -45,7 +45,7 @@ const Register = () => {
       role: values.role || "client",
       contactNumber: values.contactNumber || "",
       planType: values.planType || "base",
-      activeState: values.role === "admin" ? true : undefined,
+      activeState: true,
       trial: values.role === "admin" ? false : undefined,
       policiesAccepted: values.policiesAccepted || false,
     };
