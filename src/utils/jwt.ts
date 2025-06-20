@@ -34,7 +34,6 @@ export enum AbpTokenProperies {
     role = `http://schemas.microsoft.com/ws/2008/06/identity/claims/role`,
 }
 
-// this function will take in the token and use the function that jwt-token library provides to use for decode a jwt
 export const decodeToken = (accessToken: string): IDecodedToken => {
     return jwtDecode(accessToken);
 };
