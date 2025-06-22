@@ -1,18 +1,21 @@
 import { createContext } from "react";
+import { IFood } from "../foodProvider/context";
 
-export interface IMeal {
+export interface Imeal {
   name: string;
-  mealType: string;
-  foodItems: string[];
+  id: string;
+  note: string;
+  clientNotes: [];
+  items: IFood[];
+  itemsTotals: {
+    calories: number;
+    carbs: number;
+    protein: number;
+    fat: number;
+  };
 }
 
-export interface IMeals {
-  trainerId: string;
-  clientId: string;
-  meals: IMeal[];
-}
-
-export interface IMealPlan {
+export interface IMealplan {
   name: string;
   clientId: string;
   trainerId: string;
@@ -50,29 +53,30 @@ export interface IMealPlan {
   base: 1;
 }
 
-export interface IMealStateContext {
+export interface IMealplanStateContext {
   isPending: boolean;
   isSuccess: boolean;
   isError: boolean;
-  meal?: IMeal;
-  meals?: IMeals[];
+  mealplan?: IMealplan;
+  mealplans?: IMealplan[];
 }
 
-export interface IMealActionsContext {
-  getMeals: () => Promise<void>;
-  getMealId: (id: string) => Promise<void>;
-  getMealClient: (id: string) => Promise<void>;
-  createMeal: (meal: IMeal) => Promise<void>;
+export interface IMealplanActionsContext {
+  getTrainerMealplans: (trainerId: string) => Promise<void>;
+  getClientMealplans: (clientId: string) => Promise<void>;
+  getMealplanById: (id: string) => Promise<void>;
+  createMealplan: (mealplan: IMealplan) => Promise<void>;
 }
 
-export const INITIAL_STATE: IMealStateContext = {
+export const INITIAL_STATE: IMealplanStateContext = {
   isPending: false,
   isSuccess: false,
   isError: false,
-  meals: [],
+  mealplans: [],
 };
 
-export const MealStateContext = createContext<IMealStateContext>(INITIAL_STATE);
-export const MealActionContext = createContext<IMealActionsContext | undefined>(
-  undefined
-);
+export const MealStateContext =
+  createContext<IMealplanStateContext>(INITIAL_STATE);
+export const MealActionContext = createContext<
+  IMealplanActionsContext | undefined
+>(undefined);

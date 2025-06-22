@@ -6,6 +6,7 @@ import {
   Form,
   FormProps,
   Input,
+  InputNumber,
   Modal,
   Select,
   Spin,
@@ -13,7 +14,6 @@ import {
 import { useState } from "react";
 import { useStyles } from "../(Trainer)/style";
 import { IFood } from "@/Providers/foodProvider/context";
-import Title from "antd/es/typography/Title";
 
 const { Option } = Select;
 
@@ -37,11 +37,10 @@ const AddFoodModal = () => {
         Add Food Items
       </Button>
       <Modal
-        title="Create a Client"
+        title="Create a Food Item"
         open={isModalOpen}
         onCancel={handleCancel}
         footer={null}
-        destroyOnClose
       >
         {isPending ? (
           <Flex
@@ -59,134 +58,161 @@ const AddFoodModal = () => {
             onFinish={onFinish}
             scrollToFirstError
           >
-            <Title>Create a Food Item</Title>
-            <Form.Item
-              name="name"
-              label="Name"
-              rules={[{ required: true, message: "Please input the name" }]}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: 24,
+                flexWrap: "wrap",
+                width: "100%",
+              }}
+              className="food-modal-flex"
             >
-              <Input placeholder="Please enter a full name" />
-            </Form.Item>
-
-            <Form.Item
-              name="protein"
-              label="Protein"
-              rules={[
-                { required: true, message: "Please input amount of protein!" },
-              ]}
-            >
-              <Input placeholder="0" />
-            </Form.Item>
-
-            <Form.Item
-              name="carbs"
-              label="Carbs"
-              rules={[
-                { required: true, message: "Please input amount of carbs!" },
-              ]}
-            >
-              <Input placeholder="0" />
-            </Form.Item>
-
-            <Form.Item
-              name="sugar"
-              label="Sugar"
-              rules={[
-                { required: true, message: "Please input amount of sugar!" },
-              ]}
-            >
-              <Input placeholder="0" />
-            </Form.Item>
-
-            <Form.Item
-              name="fat"
-              label="Fat"
-              rules={[
-                { required: true, message: "Please input amount of fat!" },
-              ]}
-            >
-              <Input placeholder="0" />
-            </Form.Item>
-
-            <Form.Item
-              name="fiber"
-              label="Fiber"
-              rules={[
-                { required: true, message: "Please input amount of protein!" },
-              ]}
-            >
-              <Input placeholder="0" />
-            </Form.Item>
-            <Form.Item
-              name="sodium"
-              label="Sodium"
-              rules={[
-                { required: true, message: "Please input amount of sodium!" },
-              ]}
-            >
-              <Input placeholder="0" />
-            </Form.Item>
-            <Form.Item
-              name="potassium"
-              label="potassium"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input amount of potassium!",
-                },
-              ]}
-            >
-              <Input placeholder="0" />
-            </Form.Item>
-
-            <Form.Item
-              name="category"
-              label="Category"
-              rules={[{ required: true, message: "Please select a category!" }]}
-            >
-              <Select placeholder="select a Category">
-                <Option value="veg">veg</Option>
-                <Option value="fruit">fruit</Option>
-                <Option value="grains">grains</Option>
-                <Option value="dairy">dairy</Option>
-                <Option value="meat">meat</Option>
-                <Option value="other">other</Option>
-              </Select>
-            </Form.Item>
-
-            <Form.Item
-              name="servingSize"
-              label="Serving Size"
-              rules={[
-                { required: true, message: "Please input serving amount!" },
-              ]}
-            >
-              <Input placeholder="0" />
-            </Form.Item>
-            <Form.Item
-              name="cholesterol"
-              label="Cholesterol"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input amount of cholesterol!",
-                },
-              ]}
-            >
-              <Input placeholder="0" />
-            </Form.Item>
-
-            <Form.Item
-              name="energy"
-              label="Energy"
-              rules={[
-                { required: true, message: "Please input amount of energy!" },
-              ]}
-            >
-              <Input placeholder="0" />
-            </Form.Item>
-
-            <div style={{ display: "flex" }}>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                {/* Left column form items */}
+                <Form.Item
+                  name="name"
+                  label="Name"
+                  rules={[{ required: true, message: "Please input the name" }]}
+                >
+                  <Input placeholder="Please enter a full name" />
+                </Form.Item>
+                <Form.Item
+                  name="protein"
+                  label="Protein"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input amount of protein!",
+                    },
+                  ]}
+                >
+                  <InputNumber placeholder="0" style={{ width: "100%" }} />
+                </Form.Item>
+                <Form.Item
+                  name="carbs"
+                  label="Carbs"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input amount of carbs!",
+                    },
+                  ]}
+                >
+                  <InputNumber placeholder="0" style={{ width: "100%" }} />
+                </Form.Item>
+                <Form.Item
+                  name="sugar"
+                  label="Sugar"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input amount of sugar!",
+                    },
+                  ]}
+                >
+                  <InputNumber placeholder="0" style={{ width: "100%" }} />
+                </Form.Item>
+                <Form.Item
+                  name="fat"
+                  label="Fat"
+                  rules={[
+                    { required: true, message: "Please input amount of fat!" },
+                  ]}
+                >
+                  <InputNumber placeholder="0" style={{ width: "100%" }} />
+                </Form.Item>
+                <Form.Item
+                  name="fiber"
+                  label="Fiber"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input amount of fiber!",
+                    },
+                  ]}
+                >
+                  <InputNumber placeholder="0" style={{ width: "100%" }} />
+                </Form.Item>
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                {/* Right column form items */}
+                <Form.Item
+                  name="sodium"
+                  label="Sodium"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input amount of sodium!",
+                    },
+                  ]}
+                >
+                  <InputNumber placeholder="0" style={{ width: "100%" }} />
+                </Form.Item>
+                <Form.Item
+                  name="potassium"
+                  label="Potassium"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input amount of potassium!",
+                    },
+                  ]}
+                >
+                  <InputNumber placeholder="0" style={{ width: "100%" }} />
+                </Form.Item>
+                <Form.Item
+                  name="category"
+                  label="Category"
+                  rules={[
+                    { required: true, message: "Please select a category!" },
+                  ]}
+                >
+                  <Select placeholder="select a Category">
+                    <Option value="veg">veg</Option>
+                    <Option value="fruit">fruit</Option>
+                    <Option value="grains">grains</Option>
+                    <Option value="dairy">dairy</Option>
+                    <Option value="meat">meat</Option>
+                    <Option value="other">other</Option>
+                  </Select>
+                </Form.Item>
+                <Form.Item
+                  name="servingSize"
+                  label="Serving Size"
+                  rules={[
+                    { required: true, message: "Please input serving amount!" },
+                  ]}
+                >
+                  <InputNumber placeholder="0" style={{ width: "100%" }} />
+                </Form.Item>
+                <Form.Item
+                  name="cholesterol"
+                  label="Cholesterol"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input amount of cholesterol!",
+                    },
+                  ]}
+                >
+                  <InputNumber placeholder="0" style={{ width: "100%" }} />
+                </Form.Item>
+                <Form.Item
+                  name="energy"
+                  label="Energy"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input amount of energy!",
+                    },
+                  ]}
+                >
+                  <InputNumber placeholder="0" style={{ width: "100%" }} />
+                </Form.Item>
+              </div>
+            </div>
+            <div style={{ display: "flex", gap: 8, marginTop: 16 }}>
               <Form.Item className={styles.formItem}>
                 <Button type="primary" htmlType="submit">
                   Add Food Item

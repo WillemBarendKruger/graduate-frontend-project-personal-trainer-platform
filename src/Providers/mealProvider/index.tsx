@@ -4,97 +4,130 @@ import {
   INITIAL_STATE,
   MealStateContext,
   MealActionContext,
-  IMeal,
-  IMeals,
+  IMealplan,
 } from "./context";
-import { MealReducer } from "./reducer";
+import { MealplanReducer } from "./reducer";
 import { useContext, useReducer } from "react";
 import {
-  createMealError,
-  createMealPending,
-  createMealSuccess,
-  getMealClientError,
-  getMealClientPending,
-  getMealClientSuccess,
-  getMealIdError,
-  getMealIdPending,
-  getMealsError,
-  getMealsPending,
-  getMealsSuccess,
+  createMealplanError,
+  createMealplanPending,
+  createMealplanSuccess,
+  getClientMealplansError,
+  getClientMealplansPending,
+  getClientMealplansSuccess,
+  getMealplanByIdError,
+  getMealplanByIdPending,
+  getMealplanByIdSuccess,
+  getTrainerMealplansError,
+  getTrainerMealplansPending,
+  getTrainerMealplansSuccess,
 } from "./actions";
 
 export const MealsProvider = ({ children }: { children: React.ReactNode }) => {
-  const [state, dispatch] = useReducer(MealReducer, INITIAL_STATE);
+  const [state, dispatch] = useReducer(MealplanReducer, INITIAL_STATE);
   const instance = getAxiosInstance();
 
-  const getMeals = async () => {
-    dispatch(getMealsPending());
-    const endpoint = `Meal/`;
+  const getTrainerMealplans = async (trainerId: string) => {
+    dispatch(getTrainerMealplansPending());
+    const endpoint = `mealplan/${trainerId}`;
     await instance
       .get(endpoint)
       .then((response) => {
-        const filteredData = response.data.data.map((meal: IMeal) => ({
-          name: meal.name ?? "",
-          mealType: meal.mealType ?? "",
-          foodItems: meal.foodItems ?? [],
+        const filteredData = response.data.data.map((meals: IMealplan) => ({
+          name: meals.name ?? "",
+          clientId: meals.clientId ?? "",
+          trainerId: meals.trainerId ?? "",
+          clientName: meals.clientName ?? "",
+          description: meals.descrption ?? "",
+          notes: meals.notes ?? "",
+          clientNotes: meals.clientNotes ?? [],
+          meals: meals.meals ?? "",
+          mealTotals: meals.mealTotals ?? {},
+          base: meals.base ?? false,
         }));
-        dispatch(getMealsSuccess(filteredData));
+        dispatch(getTrainerMealplansSuccess(filteredData));
       })
       .catch((error) => {
-        dispatch(getMealsError());
+        dispatch(getTrainerMealplansError());
         console.error(error);
       });
   };
 
-  const getMealId = async (id: string) => {
-    dispatch(getMealIdPending());
+  const getClientMealplans = async (clientId: string) => {
+    dispatch(getClientMealplansPending());
+    const endpoint = `mealplan/${clientId}`;
+    await instance
+      .get(endpoint)
+      .then((response) => {
+        const filteredData = response.data.data.map((meals: IMealplan) => ({
+          name: meals.name ?? "",
+          clientId: meals.clientId ?? "",
+          trainerId: meals.trainerId ?? "",
+          clientName: meals.clientName ?? "",
+          description: meals.descrption ?? "",
+          notes: meals.notes ?? "",
+          clientNotes: meals.clientNotes ?? [],
+          meals: meals.meals ?? "",
+          mealTotals: meals.mealTotals ?? {},
+          base: meals.base ?? false,
+        }));
+        dispatch(getClientMealplansSuccess(filteredData));
+      })
+      .catch((error) => {
+        dispatch(getClientMealplansError());
+        console.error(error);
+      });
+  };
+
+  const getMealplanById = async (id: string) => {
+    dispatch(getMealplanByIdPending());
     const endpoint = `mealplan/${id}`;
     await instance
       .get(endpoint)
       .then((response) => {
-        const filteredData = response.data.data.map((meal: IMeal) => ({
+        const filteredData = response.data.data.map((meal: IMealplan) => ({
           name: meal.name ?? "",
-          mealType: meal.mealType ?? "",
-          foodItems: meal.foodItems ?? [],
+          clientId: meal.clientId ?? "",
+          trainerId: meal.trainerId ?? "",
+          clientName: meal.clientName ?? "",
+          description: meal.descrption ?? "",
+          notes: meal.notes ?? "",
+          clientNotes: meal.clientNotes ?? [],
+          meals: meal.meals ?? "",
+          mealTotals: meal.mealTotals ?? {},
+          base: meal.base ?? false,
         }));
-        dispatch(getMealsSuccess(filteredData));
+        dispatch(getMealplanByIdSuccess(filteredData));
       })
       .catch((error) => {
-        dispatch(getMealIdError());
+        dispatch(getMealplanByIdError());
         console.error(error);
       });
   };
 
-  const getMealClient = async (id: string) => {
-    dispatch(getMealClientPending());
-    const endpoint = `mealplans/client/${id}`;
-    await instance
-      .get(endpoint)
-      .then((response) => {
-        const filteredData = response.data.data.map((meals: IMeals) => ({
-          trainerId: meals.trainerId ?? "",
-          clientId: meals.clientId ?? "",
-          meals: meals.meals ?? [],
-        }));
-        dispatch(getMealClientSuccess(filteredData));
-      })
-      .catch((error) => {
-        dispatch(getMealClientError());
-        console.error(error);
-      });
-  };
-
-  const createMeal = async (Meal: IMeal) => {
-    dispatch(createMealPending());
-    const endpoint = `/Meal`;
+  const createMealplan = async (Meal: IMealplan) => {
+    dispatch(createMealplanPending());
+    const endpoint = `mealplan`;
 
     await instance
       .post(endpoint, Meal)
       .then((response) => {
-        dispatch(createMealSuccess(response.data.data));
+        const filteredData = response.data.data.map((meals: IMealplan) => ({
+          name: meals.name ?? "",
+          clientId: meals.clientId ?? "",
+          trainerId: meals.trainerId ?? "",
+          clientName: meals.clientName ?? "",
+          description: meals.descrption ?? "",
+          notes: meals.notes ?? "",
+          clientNotes: meals.clientNotes ?? [],
+          meals: meals.meals ?? "",
+          mealTotals: meals.mealTotals ?? {},
+          base: meals.base ?? false,
+        }));
+        dispatch(createMealplanSuccess(filteredData));
       })
       .catch((error) => {
-        dispatch(createMealError());
+        dispatch(createMealplanError());
         console.error(error);
       });
   };
@@ -103,10 +136,10 @@ export const MealsProvider = ({ children }: { children: React.ReactNode }) => {
     <MealStateContext.Provider value={state}>
       <MealActionContext.Provider
         value={{
-          getMeals,
-          getMealId,
-          getMealClient,
-          createMeal,
+          getTrainerMealplans,
+          getClientMealplans,
+          getMealplanById,
+          createMealplan,
         }}
       >
         {children}

@@ -1,42 +1,57 @@
 import { handleActions } from "redux-actions";
-import { INITIAL_STATE, IMealStateContext } from "./context";
-import { MealActionsEnum } from "./actions";
+import { INITIAL_STATE, IMealplanStateContext } from "./context";
+import { MealplanActionsEnum } from "./actions";
 
-export const MealReducer = handleActions<IMealStateContext, IMealStateContext>(
+export const MealplanReducer = handleActions<
+  IMealplanStateContext,
+  IMealplanStateContext
+>(
   {
-    [MealActionsEnum.getMealsPending]: (state, action) => ({
+    [MealplanActionsEnum.getTrainerMealplansPending]: (state, action) => ({
       ...state,
       ...action.payload,
     }),
-    [MealActionsEnum.getMealsSuccess]: (state, action) => ({
+    [MealplanActionsEnum.getTrainerMealplansSuccess]: (state, action) => ({
       ...state,
       ...action.payload,
     }),
-    [MealActionsEnum.getMealsError]: (state, action) => ({
+    [MealplanActionsEnum.getTrainerMealplansError]: (state, action) => ({
       ...state,
       ...action.payload,
     }),
-    [MealActionsEnum.getMealClientPending]: (state, action) => ({
+    [MealplanActionsEnum.getClientMealplansPending]: (state, action) => ({
       ...state,
       ...action.payload,
     }),
-    [MealActionsEnum.getMealClientSuccess]: (state, action) => ({
+    [MealplanActionsEnum.getClientMealplansSuccess]: (state, action) => ({
       ...state,
       ...action.payload,
     }),
-    [MealActionsEnum.getMealClientError]: (state, action) => ({
+    [MealplanActionsEnum.getClientMealplansError]: (state, action) => ({
       ...state,
       ...action.payload,
     }),
-    [MealActionsEnum.createMealPending]: (state, action) => ({
+    [MealplanActionsEnum.getMealplanByIdPending]: (state, action) => ({
       ...state,
       ...action.payload,
     }),
-    [MealActionsEnum.createMealSuccess]: (state, action) => ({
+    [MealplanActionsEnum.getMealplanByIdSuccess]: (state, action) => ({
       ...state,
       ...action.payload,
     }),
-    [MealActionsEnum.createMealError]: (state, action) => ({
+    [MealplanActionsEnum.getMealplanByIdError]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+    [MealplanActionsEnum.createMealplanPending]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+    [MealplanActionsEnum.createMealplanSuccess]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+    [MealplanActionsEnum.createMealplanError]: (state, action) => ({
       ...state,
       ...action.payload,
     }),

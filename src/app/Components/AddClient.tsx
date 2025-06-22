@@ -7,6 +7,7 @@ import {
   Flex,
   Form,
   Input,
+  InputNumber,
   message,
   Modal,
   Select,
@@ -104,7 +105,7 @@ const AddClientModal = () => {
                 { required: true, message: "Please input your phone number!" },
               ]}
             >
-              <Input addonBefore={"+27"} style={{ width: "100%" }} />
+              <InputNumber addonBefore={"+27"} style={{ width: "100%" }} />
             </Form.Item>
             <Form.Item
               name="sex"
